@@ -38,6 +38,7 @@ theme:
     - search 
     - changelog  
     - print-site
+    - mkdocs-glightbox
 markdown_extensions: # markdown extensions
   - abbr
   - admonition
