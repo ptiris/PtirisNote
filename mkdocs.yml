@@ -1,0 +1,123 @@
+site_name: Ptiris' Note
+copyright: Copyright &copy; 2025 | Ptiris
+repo_name: Ptris'Note
+repo_url: 
+theme:
+    name: material
+    language: zh
+    features: 
+    - announce.dismiss 
+    - content.action.edit 
+    - content.action.view 
+    - content.code.annotate 
+    - content.code.copy 
+    - content.code.select 
+    - content.tooltips 
+    - navigation.expand 
+    - navigation.footer 
+    - navigation.indexes 
+    - navigation.instant.prefetch 
+    - navigation.instant.progress 
+    - navigation.path 
+    - navigation.prune 
+    - navigation.sections 
+    - navigation.tabs 
+    - navigation.tabs.sticky 
+    - navigation.top 
+    - navigation.tracking 
+    - search.highlight 
+    - navigation.path
+    - search.share 
+    - search.suggest 
+    - toc.follow
+    plugins:
+    - blog 
+    - statistics:
+        words_per_minute: 290   
+    - tags 
+    - search 
+    - changelog  
+    - print-site
+markdown_extensions: # markdown extensions
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+      toc_depth: 4
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - pymdownx.critic:
+      mode: view
+extra_javascript:
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - css/custom.css
+  - https://unpkg.com/katex@0/dist/katex.min.css
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
+  - https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.css
+  - https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css
+
+nav:
+  - Welcome: index.md
+  - Meta: 
+    - metacourses/index.md
+    - CMU 15-445: 
+      - metacourses/CMU 15-445/index.md 
+      - Lec1 Relational Model and Algebra: metacourses/CMU 15-445/lec1.md 
+      - Lec2 Mordern SQL: metacourses/CMU 15-445/lec2.md 
+      - Lec3 Database Storage: metacourses/CMU 15-445/lec3.md 
+      - Lec4 Storage Models: metacourses/CMU 15-445/lec4.md 
+      - Lec5 Hash Tables: metacourses/CMU 15-445/lec5.md 
+      - Lec6 B plus Tree Index: metacourses/CMU 15-445/lec6.md
+      - Lec7 Concurrency Control: metacourses/CMU 15-445/lec7.md
+  - System:
+    - system/index.md
+    - Computer Architecture:
+      - Introduction: system/CA/intro2CA.md
+      - Lec1 Fundamentals of design: system/CA/lec1.md
+    - Database:
+      - 关系模型: system/databases/关系模型.md
