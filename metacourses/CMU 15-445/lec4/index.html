@@ -1,0 +1,1279 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../lec3/">
+      
+      
+        <link rel="next" href="../lec5/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+    
+    
+      
+        <title>Lec4 Storage Models - Ptiris' Note</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/custom.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#storage-models" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Ptiris&#39; Note" class="md-header__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ptiris' Note
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lec4 Storage Models
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Welcome
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  Meta
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../system/" class="md-tabs__link">
+          
+  
+    
+  
+  System
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Ptiris&#39; Note" class="md-nav__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Ptiris' Note
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Meta
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2" id="__nav_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Meta
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    CMU 15-445
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            CMU 15-445
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lec1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec1 Relational Model and Algebra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lec2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec2 Mordern SQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lec3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec3 Database Storage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Lec4 Storage Models
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Lec4 Storage Models
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#database-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      DATABASE MODELS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-models_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      STORAGE MODELS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STORAGE MODELS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      NSM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      DSM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pax" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAX
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      COMPRESSION
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="COMPRESSION">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#naive-compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      NAIVE COMPRESSION
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-length-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      RUN-LENGTH ENCODING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bit-packing" class="md-nav__link">
+    <span class="md-ellipsis">
+      BIT-PACKING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mostly-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      MOSTLY ENCODING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bitmap-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      BITMAP ENCODING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delta-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      DELTA ENCODING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dictionary-compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      DICTIONARY COMPRESSION
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lec5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec5 Hash Tables
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lec6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec6 B plus Tree Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lec7/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec7 Concurrency Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../system/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    System
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#database-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      DATABASE MODELS
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#storage-models_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      STORAGE MODELS
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="STORAGE MODELS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      NSM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      DSM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pax" class="md-nav__link">
+    <span class="md-ellipsis">
+      PAX
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      COMPRESSION
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="COMPRESSION">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#naive-compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      NAIVE COMPRESSION
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-length-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      RUN-LENGTH ENCODING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bit-packing" class="md-nav__link">
+    <span class="md-ellipsis">
+      BIT-PACKING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mostly-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      MOSTLY ENCODING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bitmap-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      BITMAP ENCODING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delta-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      DELTA ENCODING
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dictionary-compression" class="md-nav__link">
+    <span class="md-ellipsis">
+      DICTIONARY COMPRESSION
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="storage-models">Storage Models<a class="headerlink" href="#storage-models" title="Permanent link">&para;</a></h1>
+<h2 id="database-models">DATABASE MODELS<a class="headerlink" href="#database-models" title="Permanent link">&para;</a></h2>
+<p>我们可以简单的对数据库的工作做出三种分类：</p>
+<ul>
+<li>
+<p>OLTP: Online Transaction Processing : 每次操作只涉及数量级较小的读/写</p>
+</li>
+<li>
+<p>OLAP: Online Analytical Processing  : 每次操作设计复杂的查询，需要计算大量的 aggregates. 一般而言 OLAP 需要 OLTP 侧从现有的数据中分析和提取新的数据。</p>
+</li>
+<li>
+<p>HTAP: Hybrid Transaction + Analytical Processing :OLTP 和 OLAP 的结合</p>
+</li>
+</ul>
+<p>我们先前所设计的的储存模式默认将一个 tuple 的所有 attributes 全部储存在一个 page 中（对于一些超大的 attributes 可能不是这样的），但这实际上对于 OLAP 而言并非最优的策略。</p>
+<div class="admonition warning">
+<p class="admonition-title">Wiki 例子</p>
+<p>假设我们有一个 wiki 数据库，其中保存了用户、页面和每一次修改的信息</p>
+<div class="language-SQL highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">useracct</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">userID</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">userName</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="err">⋮</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">);</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">revisions</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">revID</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w">  </span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">userID</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">useracct</span><span class="w"> </span><span class="p">(</span><span class="n">userID</span><span class="p">),</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="n">pageID</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">pages</span><span class="w"> </span><span class="p">(</span><span class="n">pageID</span><span class="p">),</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="n">content</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="n">updated</span><span class="w"> </span><span class="n">DATETIME</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">);</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">pages</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="n">pageID</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="n">title</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="n">latest</span><span class="w"> </span><span class="nb">INT</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">revisions</span><span class="w"> </span><span class="p">(</span><span class="n">revID</span><span class="p">),</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="p">);</span>
+</span></code></pre></div>
+<p>其中，revisions 中的 useracct 和 pages 两个指针分别指向一个页面和一个用户；而 page 中的指针指向最新的一个修改。
+当我们想要查询一个页面对应的最新的ID时，就可以按照如下的方法去查询,这样的操作就是 OLTP 的。</p>
+<div class="language-SQL highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="o">*</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">pages</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">P</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">revisions</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">R</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="k">ON</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">latest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">revID</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">P</span><span class="p">.</span><span class="n">pageID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">?</span>
+</span></code></pre></div>
+<p>而 OLAP 则是对应需要读取大部分数据的操作。例如我们需要查询登录的用户的主机名以 '.gov' 结尾的数量</p>
+<div class="language-SQL highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="n">U</span><span class="p">.</span><span class="n">lastLogin</span><span class="p">),</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">month</span><span class="w"> </span><span class="k">FROM</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">            </span><span class="n">U</span><span class="p">.</span><span class="n">lastLogin</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">month</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">useracct</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">U</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">U</span><span class="p">.</span><span class="n">hostname</span><span class="w"> </span><span class="k">LIKE</span><span class="w"> </span><span class="s1">&#39;%.gov&#39;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">     </span><span class="k">EXTRACT</span><span class="p">(</span><span class="k">month</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">U</span><span class="p">.</span><span class="n">lastLogin</span><span class="p">)</span>
+</span></code></pre></div>
+</div>
+<h2 id="storage-models_1">STORAGE MODELS<a class="headerlink" href="#storage-models_1" title="Permanent link">&para;</a></h2>
+<p>DBMS 的储存模型指的是数据库系统如何在物理层面上组织磁盘和内存中的元组以及它们相对于其他元组和自身属性的关系。对于不同的查询，储存模型将会有不同的影响，这对于数据库的设计与构建是十分重要的。常见的储存模型有三种：</p>
+<ul>
+<li>N-Ary Storage Model (NSM)</li>
+<li>Decomposition Storage Model (DSM)</li>
+<li>Partition Attributes Across (PAX)</li>
+</ul>
+<h3 id="nsm">NSM<a class="headerlink" href="#nsm" title="Permanent link">&para;</a></h3>
+<p>N-Ary Storage Model 是将一个元组中的所有属性连续的存储在一页的储存模型（行储存）。这有利于 OLTP 类型的工作，因为此时的查询只会访问单独的个体。一般而言 NSM 的页面的大小都是硬件页面的大小的整数倍。</p>
+<p>例如，当我们想要执行一个用户的登录时，我们根据 Index 找到对应的页，再根据 Slot Offset 找到对应的位置即可。
+<img alt="" src="../assets/23.png" /></p>
+<p>但是如果我们想要查询登录的用户的主机名以 '.gov' 结尾的数量时，我们需要扫描表上所有的页，因为我们需要查看所有的元组中是否是符合条件的。但是我们进需要 lastLogin 和 hostname 两个属性，可以看到我们访问了许多无用的数据。</p>
+<p><img alt="" src="../assets/24.png" /></p>
+<ul>
+<li>
+<p>Advantages</p>
+<ul>
+<li>可以进行快速的插入，更新，和删除</li>
+<li>对于需要查询一整组元组的操作而言比较友好（OLTP）</li>
+</ul>
+</li>
+<li>
+<p>Disadvantages</p>
+<ul>
+<li>对于需要扫描表格中大量的数据或者仅需要部分属性的查询而言并不友好</li>
+<li>对于压缩而言并不好，因为在一个页面中存在多个值</li>
+</ul>
+</li>
+</ul>
+<h3 id="dsm">DSM<a class="headerlink" href="#dsm" title="Permanent link">&para;</a></h3>
+<p>与行储存相反，我们不再将同一个元组的所有属性储存在一起，而是分别将每一个属性单独储存在一个块(Block)中。这有利于 OLAP 的工作。而 DBMS 同时也负责在读写数据时对于元组的属性的拆分和合并。</p>
+<p>此时，对于固定长度的属性，我们将其分别储存在不同的文件中（也可能包括 meta-data ，例如 null）。
+<center></p>
+<p><img alt="" src="../assets/25.png" />
+</center></p>
+<p>但是我们在 DSM 中需要额外考虑的一点是，我们该如何将属性对应到元组上？</p>
+<ul>
+<li>Fixed-length Offsets：我们将元组唯一的索引作为其属性在页中的 Offset 偏移量。（但这里额外需要每一个值的长度是固定的。）</li>
+<li>Embedded Tuple Ids ： 我们将元组的 ID 在页中额外储存为一列，和每一个属性一一对应。</li>
+</ul>
+<p><center></p>
+<p><img alt="" src="../assets/26.png" />
+</center>
+但实际情况下往往存在可变长的值的情况，为了使用第一种方法，我们需要进行 <strong>压缩</strong>(例如字典压缩)。</p>
+<ul>
+<li>Advantages<ul>
+<li>减少不必要的IO查询的浪费</li>
+<li>对于 OLAP 类型的工作，有着更好地性能</li>
+<li>更利于数据压缩</li>
+</ul>
+</li>
+<li>Disadvantages<ul>
+<li>对于点对点的查询、插入、更新较慢</li>
+</ul>
+</li>
+</ul>
+<h3 id="pax">PAX<a class="headerlink" href="#pax" title="Permanent link">&para;</a></h3>
+<p>DBMS 在数据库页面内垂直分区属性。这样做的目的是在保留行存储的空间位置优势的同时，获得列存储更快处理的优势。全局的文件头包含每一行组的偏移量。而每一行组中，将包含按照属性进行分类的列。</p>
+<p><img alt="" src="../assets/27.png" /></p>
+<h2 id="compression">COMPRESSION<a class="headerlink" href="#compression" title="Permanent link">&para;</a></h2>
+<p>实际上 IO 是我们数据库系统在查询操作是的一个瓶颈，所以我们可以通过压缩数据来实现在相同 IO 下更好的性能。这相当于在 CPU 和 IO 中进行权衡，压缩将会减小IO的压力，但会增加CPU的载荷。</p>
+<p>具体而言，我们希望实现如下的压缩：</p>
+<ul>
+<li>压缩后必须产生固定长度的值</li>
+<li>在查询操作中，我们希望尽可能的延迟解压的操作</li>
+<li>必须是无损压缩</li>
+</ul>
+<p>我们同样也要考虑在什么层面进行压缩：</p>
+<ul>
+<li>
+<p>Choice #1: Block-level</p>
+<ul>
+<li>对于同一个表格中的元组进行压缩</li>
+</ul>
+</li>
+<li>
+<p>Choice #2: Tuple-level</p>
+<ul>
+<li>对于一个元组中的内容进行压缩 (NSM-only).</li>
+</ul>
+</li>
+<li>
+<p>Choice #3: Attribute-level</p>
+<ul>
+<li>对于单个属性进行压缩 (overflow).</li>
+<li>也可以对于同一元组的多个属性进行压缩</li>
+</ul>
+</li>
+<li>
+<p>Choice #4: Column-level</p>
+<ul>
+<li>同时对多个元组的同一属性进行压缩 (DSM-only).</li>
+</ul>
+</li>
+</ul>
+<h4 id="naive-compression">NAIVE COMPRESSION<a class="headerlink" href="#naive-compression" title="Permanent link">&para;</a></h4>
+<p>DBMS 通过通用的数据压缩算法对数据库中的数据进行压缩 (e.g., gzip, LZO, LZ4, Snappy, Brotli, Oracle OZIP, Zstd).其中的一个例子便是 MySQL 中 InnoDB.</p>
+<p><img alt="" src="../assets/28.png" /></p>
+<p>首先数据被压缩成二的整数次方大小的压缩页，并维护一个 mod log （日志类型）。当我们需要插入一个值时，我们将其从文件中拿出，放入 buffer pool 中,并将需修改添加到 mod log 中，此时不需要解压；当我们读取数据时，我们将其解压，并将mod log合并，最后重新压缩放回文件。</p>
+<p>但由于数据库并不知道压缩后数据的含义（因为这些算法都是建立在某种字典压缩上的，而DBMS并不知道其具体的含义），我们在查询前必须要全部解压缩才能够实现。我们希望数据库能够实现自己的压缩算法，使其能够在压缩的数据上进行查询。</p>
+<h4 id="run-length-encoding">RUN-LENGTH ENCODING<a class="headerlink" href="#run-length-encoding" title="Permanent link">&para;</a></h4>
+<p>将一列中连续重复的值变为特定偏移量处该值出现的次数。这对于排序后的表而言效果较好。我们进需要记录：属性的值，开始的偏移量，重复的次数即可。</p>
+<p><img alt="" src="../assets/29.png" /></p>
+<h4 id="bit-packing">BIT-PACKING<a class="headerlink" href="#bit-packing" title="Permanent link">&para;</a></h4>
+<p>如果属性的值实际上远小于我们声明的类型的值，我们可以减小实际储存的值的位数。</p>
+<p><center></p>
+<p><img alt="" src="../assets/30.png" /></p>
+<p></center></p>
+<h4 id="mostly-encoding">MOSTLY ENCODING<a class="headerlink" href="#mostly-encoding" title="Permanent link">&para;</a></h4>
+<p>在 BIT-PACKING 中，我们无法保证每一个值都会远小于我们声明类型的值。所以当一个属性的绝大多数的值小于声明类型的值时，我们将极大的值单独储存，剩下的值按照 bit-packing 的方式储存。</p>
+<h4 id="bitmap-encoding">BITMAP ENCODING<a class="headerlink" href="#bitmap-encoding" title="Permanent link">&para;</a></h4>
+<p>如果我们有一个属性，其不同的值的个数较少，我们可以为每一个不同的值单独储存一个bit值，表示其是否具有这个值。</p>
+<p><img alt="" src="../assets/31.png" /></p>
+<h4 id="delta-encoding">DELTA ENCODING<a class="headerlink" href="#delta-encoding" title="Permanent link">&para;</a></h4>
+<p>当我们储存的值之间比较接近时，我们可以不在储存值，而是仅仅储存相邻两个属性的值之间的差。此时我们也可以进一步的复用 RLE 压缩。</p>
+<p><img alt="" src="../assets/32.png" /></p>
+<h4 id="dictionary-compression">DICTIONARY COMPRESSION<a class="headerlink" href="#dictionary-compression" title="Permanent link">&para;</a></h4>
+<p>我们将常出现的值用固定长度的编码代替，同时维护一个词典用于映射值与编码。（这是实际上数据库中最为常用的压缩方法）字典压缩也支持范围查询，我们只需要保持编码顺序与原始值的顺序即可。</p>
+<p><img alt="" src="../assets/33.png" /></p>
+<p>所以我们需要一个数据结构，能够帮助我们完成解压缩的过程，同时维护原始值的相对顺序。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../lec3/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Lec3 Database Storage">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                Lec3 Database Storage
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../lec5/" class="md-footer__link md-footer__link--next" aria-label="下一页: Lec5 Hash Tables">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              <div class="md-ellipsis">
+                Lec5 Hash Tables
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 | Ptiris
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.code.select", "content.tooltips", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "navigation.path", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
