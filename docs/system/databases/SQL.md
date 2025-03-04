@@ -215,4 +215,106 @@ GROUP BY 返回的值同样可以作为我们的选择条件之一，此时这�
 
 ```#!sql FROM → WHERE → GROUP (AGGREGATE) → HAVING → SELECT → DISTINCT → ORDER BY ```
 
-## 
+## More Sophisticated Technique
+
+在我们的查询中，我们常常无法在一句SQL语言中描述我们想要查找的信息。为了简化我们查询的逻辑，我们可以通过一些更加高级的技巧和语法来实现更复杂的查询。
+
+### Nested Subqueries 
+
+我们的 `SELECT` 语句的查询结果可以作为另一个查询语句的一部分。这时候，我们的 FROM 可以从子查询中筛选出我们想要的结果。为了描述我们的查询与子查询的关系，我们可能需要 `IN` `ALL` `EXIST` 等谓语来描述。
+
+!!! example 
+    1. Find all customers who have both an account and a loan at the bank. 
+
+    ```sql
+    SELECT distinct customer_name 
+      FROM borrower 
+      WHERE customer_name in (SELECT customer_name 
+                                            FROM depositor) 
+    ```
+
+    2. Find all customers who have loans at a bank but do not have an account at the bank. 
+    
+    ```sql
+    SELECT distinct customer_name 
+      \FROM borrower B, loan L 
+	 WHERE B.loan_number = L.loan_number and 
+        	    branch_name = ‘Perryridge’ and 
+                (branch_name, customer_name) in 
+		  (SELECT branch_name, customer_name 
+		   FROM depositor D, account A 
+		   WHERE D.account_number = A.account_number) 
+    ```
+
+    3. Find the account_number with the maximum balance for every branch. 
+
+    ```sql
+    SELECT account_number AN, balance 
+	     FROM account  A 
+          WHERE balance >= (SELECT max(balance) 
+			                FROM account B 
+			                WHERE A.branch_name = B.branch_name) 
+	     ORDER by balance 
+    ```
+
+### Views
+
+View是基于查询结果定义的虚拟表，它本身并不真正存储数据，而是存储一个SQL查询的定义。每次访问这个视图时，数据库会动态执行它的查询，得到最新的结果。这相当于一个临时的变量（甚至不算变量，因为它没有实际上存储，数据库将会动态的执行）。并且不是所有的用户都能访问View。
+
+我们可以通过 ```#!sql CREATE VIEW <v_name> AS SELECT a1, a2, ... From ...``` 来定义一个 View ；通过 DROP 来删除一个 View。
+
+??? example
+    Create a view consisting of branches and their customer names. 
+
+    ```sql
+    CREAT view all_customer as 
+         ((SELECT branch_name, customer_name 
+          FROM depositor, account 
+          WHERE depositor.account_number = account.account_number) 
+       union
+         (SELECT branch_name, customer_name 
+          FROM borrower, loan 
+          WHERE borrower.loan_number = loan.loan_number)) 
+    ```
+
+### Derived Relations 
+
+Derived Relation是查询结果生成的临时关系，也可以叫查询表达式的结果表。它与 View 类似，但不同的是，他的生命周期仅仅存在于查询中。这意味着它比 View 更加临时。
+
+??? example
+    Example: Find the average account balance of those branches where the average account balance is greater than $500. 
+
+    ```sql hl_lines="5 6"
+    SELECT branch_name, avg_bal 
+                 FROM (SELECT branch_name, avg(balance) 
+	                 FROM account 
+	                 GROUP BY branch_name) 
+	                 as result (branch_name, avg_bal) 
+                 WHERE avg_bal > 500 
+
+    ```
+
+### With Clause
+
+WITH子句本质上是一个临时命名的子查询，它更类似于View，但他的定义仅仅局限于本地。With Clause 可以给一个子查询结果起名，后续SQL语句里可以多次引用这个名字，但只在当前这条SQL语句的上下文里有效。
+
+??? example 
+    Find all accounts with the maximum balance. 
+    ```sql
+    WITH max_balance(value) as 
+                SELECT max(balance) 
+                FROM account 
+      SELECT account_number 
+      FROM account, max_balance 
+      WHERE account.balance = max_balance.value
+    ```
+
+
+| 特点 | View | Derived Relation | WITH（CTE） |
+|---|---|---|---|
+| 存储位置 | 数据库对象 | 查询内部 | 查询内部 |
+| 生命周期 | 长期 | 当前查询 | 当前查询 |
+| 可复用性 | 多个查询复用 | 只能在当前查询用一次 | 可以在 **当前查询** 里多次引用 |
+| 语法位置 | `CREATE VIEW` | 子查询里 | 查询顶部的`WITH`段 |
+| 作用 | 封装长期逻辑 | 局部临时表 | 复杂查询拆分+重用 |
+
