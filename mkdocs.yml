@@ -122,6 +122,7 @@ nav:
     - Computer Architecture:
       - Introduction: system/CA/intro2CA.md
       - Lec1 Fundamentals of design: system/CA/lec1.md
+      - Lec2 Pipling: system/CA/lec2.md
     - Database:
       - system/databases/index.md
       - Lec1 关系模型: system/databases/关系模型.md
