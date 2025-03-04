@@ -3,6 +3,8 @@ copyright: Copyright &copy; 2025 | Ptiris
 repo_name: Ptris'Note
 repo_url: 
 theme:
+    icon:
+      logo: fontawesome/solid/mug-hot
     name: material
     language: zh
     features: 
@@ -121,4 +123,6 @@ nav:
       - Introduction: system/CA/intro2CA.md
       - Lec1 Fundamentals of design: system/CA/lec1.md
     - Database:
-      - 关系模型: system/databases/关系模型.md
+      - system/databases/index.md
+      - Lec1 关系模型: system/databases/关系模型.md
+      - Lec2 SQL语言: system/databases/SQL.md
