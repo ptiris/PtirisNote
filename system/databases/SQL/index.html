@@ -804,11 +804,53 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#more-sophisticated-technique" class="md-nav__link">
     <span class="md-ellipsis">
-      
+      More Sophisticated Technique
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="More Sophisticated Technique">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nested-subqueries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nested Subqueries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#views" class="md-nav__link">
+    <span class="md-ellipsis">
+      Views
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derived-relations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Derived Relations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-clause" class="md-nav__link">
+    <span class="md-ellipsis">
+      With Clause
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -992,11 +1034,53 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#more-sophisticated-technique" class="md-nav__link">
     <span class="md-ellipsis">
-      
+      More Sophisticated Technique
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="More Sophisticated Technique">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nested-subqueries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nested Subqueries
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#views" class="md-nav__link">
+    <span class="md-ellipsis">
+      Views
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#derived-relations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Derived Relations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#with-clause" class="md-nav__link">
+    <span class="md-ellipsis">
+      With Clause
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1196,7 +1280,127 @@
 <h3 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
 <p>事实上，我们执行一个 SELECT 查询的顺序为：</p>
 <p><code class="language-sql highlight"><span class="k">FROM</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="p">(</span><span class="k">AGGREGATE</span><span class="p">)</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">HAVING</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span></code></p>
-<h2 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h2 id="more-sophisticated-technique">More Sophisticated Technique<a class="headerlink" href="#more-sophisticated-technique" title="Permanent link">&para;</a></h2>
+<p>在我们的查询中，我们常常无法在一句SQL语言中描述我们想要查找的信息。为了简化我们查询的逻辑，我们可以通过一些更加高级的技巧和语法来实现更复杂的查询。</p>
+<h3 id="nested-subqueries">Nested Subqueries<a class="headerlink" href="#nested-subqueries" title="Permanent link">&para;</a></h3>
+<p>我们的 <code>SELECT</code> 语句的查询结果可以作为另一个查询语句的一部分。这时候，我们的 FROM 可以从子查询中筛选出我们想要的结果。为了描述我们的查询与子查询的关系，我们可能需要 <code>IN</code> <code>ALL</code> <code>EXIST</code> 等谓语来描述。</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<ol>
+<li>Find all customers who have both an account and a loan at the bank. </li>
+</ol>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">borrower</span><span class="w"> </span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">                                        </span><span class="k">FROM</span><span class="w"> </span><span class="n">depositor</span><span class="p">)</span><span class="w"> </span>
+</span></code></pre></div>
+<ol>
+<li>Find all customers who have loans at a bank but do not have an account at the bank. </li>
+</ol>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="err">\</span><span class="k">FROM</span><span class="w"> </span><span class="n">borrower</span><span class="w"> </span><span class="n">B</span><span class="p">,</span><span class="w"> </span><span class="n">loan</span><span class="w"> </span><span class="n">L</span><span class="w"> </span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">L</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="k">and</span><span class="w"> </span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">            </span><span class="n">branch_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">‘</span><span class="n">Perryridge</span><span class="err">’</span><span class="w"> </span><span class="k">and</span><span class="w"> </span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">            </span><span class="p">(</span><span class="n">branch_name</span><span class="p">,</span><span class="w"> </span><span class="n">customer_name</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">      </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">branch_name</span><span class="p">,</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">       </span><span class="k">FROM</span><span class="w"> </span><span class="n">depositor</span><span class="w"> </span><span class="n">D</span><span class="p">,</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">A</span><span class="w"> </span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">       </span><span class="k">WHERE</span><span class="w"> </span><span class="n">D</span><span class="p">.</span><span class="n">account_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">account_number</span><span class="p">)</span><span class="w"> </span>
+</span></code></pre></div>
+<ol>
+<li>Find the account_number with the maximum balance for every branch. </li>
+</ol>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">account_number</span><span class="w"> </span><span class="n">AN</span><span class="p">,</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">     </span><span class="k">FROM</span><span class="w"> </span><span class="n">account</span><span class="w">  </span><span class="n">A</span><span class="w"> </span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">      </span><span class="k">WHERE</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">max</span><span class="p">(</span><span class="n">balance</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">                        </span><span class="k">FROM</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">B</span><span class="w"> </span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">                        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">branch_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">branch_name</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">     </span><span class="k">ORDER</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">balance</span><span class="w"> </span>
+</span></code></pre></div>
+</div>
+<h3 id="views">Views<a class="headerlink" href="#views" title="Permanent link">&para;</a></h3>
+<p>View是基于查询结果定义的虚拟表，它本身并不真正存储数据，而是存储一个SQL查询的定义。每次访问这个视图时，数据库会动态执行它的查询，得到最新的结果。这相当于一个临时的变量（甚至不算变量，因为它没有实际上存储，数据库将会动态的执行）。并且不是所有的用户都能访问View。</p>
+<p>我们可以通过 <code class="language-sql highlight"><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="o">&lt;</span><span class="n">v_name</span><span class="o">&gt;</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">a1</span><span class="p">,</span><span class="w"> </span><span class="n">a2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">From</span><span class="w"> </span><span class="p">...</span></code> 来定义一个 View ；通过 DROP 来删除一个 View。</p>
+<details class="example">
+<summary>Example</summary>
+<p>Create a view consisting of branches and their customer names. </p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">CREAT</span><span class="w"> </span><span class="k">view</span><span class="w"> </span><span class="n">all_customer</span><span class="w"> </span><span class="k">as</span><span class="w"> </span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">     </span><span class="p">((</span><span class="k">SELECT</span><span class="w"> </span><span class="n">branch_name</span><span class="p">,</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">depositor</span><span class="p">,</span><span class="w"> </span><span class="n">account</span><span class="w"> </span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">      </span><span class="k">WHERE</span><span class="w"> </span><span class="n">depositor</span><span class="p">.</span><span class="n">account_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">account</span><span class="p">.</span><span class="n">account_number</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">   </span><span class="k">union</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">     </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">branch_name</span><span class="p">,</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="k">FROM</span><span class="w"> </span><span class="n">borrower</span><span class="p">,</span><span class="w"> </span><span class="n">loan</span><span class="w"> </span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">      </span><span class="k">WHERE</span><span class="w"> </span><span class="n">borrower</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loan</span><span class="p">.</span><span class="n">loan_number</span><span class="p">))</span><span class="w"> </span>
+</span></code></pre></div>
+</details>
+<h3 id="derived-relations">Derived Relations<a class="headerlink" href="#derived-relations" title="Permanent link">&para;</a></h3>
+<p>Derived Relation是查询结果生成的临时关系，也可以叫查询表达式的结果表。它与 View 类似，但不同的是，他的生命周期仅仅存在于查询中。这意味着它比 View 更加临时。</p>
+<details class="example">
+<summary>Example</summary>
+<p>Example: Find the average account balance of those branches where the average account balance is greater than $500. </p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">branch_name</span><span class="p">,</span><span class="w"> </span><span class="n">avg_bal</span><span class="w"> </span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">             </span><span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">branch_name</span><span class="p">,</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">balance</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">                 </span><span class="k">FROM</span><span class="w"> </span><span class="n">account</span><span class="w"> </span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">                 </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">branch_name</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="hll"><span class="w">                 </span><span class="k">as</span><span class="w"> </span><span class="k">result</span><span class="w"> </span><span class="p">(</span><span class="n">branch_name</span><span class="p">,</span><span class="w"> </span><span class="n">avg_bal</span><span class="p">)</span><span class="w"> </span>
+</span></span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="hll"><span class="w">             </span><span class="k">WHERE</span><span class="w"> </span><span class="n">avg_bal</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span>
+</span></span></code></pre></div>
+</details>
+<h3 id="with-clause">With Clause<a class="headerlink" href="#with-clause" title="Permanent link">&para;</a></h3>
+<p>WITH子句本质上是一个临时命名的子查询，它更类似于View，但他的定义仅仅局限于本地。With Clause 可以给一个子查询结果起名，后续SQL语句里可以多次引用这个名字，但只在当前这条SQL语句的上下文里有效。</p>
+<details class="example">
+<summary>Example</summary>
+<p>Find all accounts with the maximum balance. 
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">WITH</span><span class="w"> </span><span class="n">max_balance</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">            </span><span class="k">SELECT</span><span class="w"> </span><span class="k">max</span><span class="p">(</span><span class="n">balance</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">            </span><span class="k">FROM</span><span class="w"> </span><span class="n">account</span><span class="w"> </span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">  </span><span class="k">SELECT</span><span class="w"> </span><span class="n">account_number</span><span class="w"> </span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">account</span><span class="p">,</span><span class="w"> </span><span class="n">max_balance</span><span class="w"> </span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">account</span><span class="p">.</span><span class="n">balance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max_balance</span><span class="p">.</span><span class="n">value</span>
+</span></code></pre></div></p>
+</details>
+<table>
+<thead>
+<tr>
+<th>特点</th>
+<th>View</th>
+<th>Derived Relation</th>
+<th>WITH（CTE）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储位置</td>
+<td>数据库对象</td>
+<td>查询内部</td>
+<td>查询内部</td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td>长期</td>
+<td>当前查询</td>
+<td>当前查询</td>
+</tr>
+<tr>
+<td>可复用性</td>
+<td>多个查询复用</td>
+<td>只能在当前查询用一次</td>
+<td>可以在 <strong>当前查询</strong> 里多次引用</td>
+</tr>
+<tr>
+<td>语法位置</td>
+<td><code>CREATE VIEW</code></td>
+<td>子查询里</td>
+<td>查询顶部的<code>WITH</code>段</td>
+</tr>
+<tr>
+<td>作用</td>
+<td>封装长期逻辑</td>
+<td>局部临时表</td>
+<td>复杂查询拆分+重用</td>
+</tr>
+</tbody>
+</table>
 
 
 
