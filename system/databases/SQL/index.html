@@ -1,0 +1,1272 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
+    
+    
+      
+        <title>Lec2 SQL语言 - Ptiris' Note</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/custom.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sql" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Ptiris&#39; Note" class="md-header__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32v192c0 53 43 96 96 96h192c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48h-16v-96zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Ptiris' Note
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lec2 SQL语言
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="分享" aria-label="分享" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Welcome
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../metacourses/" class="md-tabs__link">
+          
+  
+    
+  
+  Meta
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+    
+  
+  System
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Ptiris&#39; Note" class="md-nav__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32v192c0 53 43 96 96 96h192c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48h-16v-96zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"/></svg>
+
+    </a>
+    Ptiris' Note
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../metacourses/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Meta
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    System
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Computer Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CA/intro2CA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CA/lec1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec1 Fundamentals of design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Database
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec1 关系模型
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Lec2 SQL语言
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Lec2 SQL语言
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-definition-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Definition Language
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Definition Language">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#domain-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-manipulation-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Manipulation Language
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Manipulation Language">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-clause" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Clause
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from-clause" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Clause
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rename-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rename Option
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      String Option
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      Order By
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set Operations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aggregate-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aggregate Functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#data-definition-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Definition Language
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Definition Language">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#domain-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Domain Types
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#index" class="md-nav__link">
+    <span class="md-ellipsis">
+      Index
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-manipulation-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Manipulation Language
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data Manipulation Language">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-clause" class="md-nav__link">
+    <span class="md-ellipsis">
+      Select Clause
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from-clause" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Clause
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rename-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rename Option
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#string-option" class="md-nav__link">
+    <span class="md-ellipsis">
+      String Option
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order-by" class="md-nav__link">
+    <span class="md-ellipsis">
+      Order By
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set Operations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aggregate-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Aggregate Functions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="sql">SQL 基本语法与使用<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h1>
+<div class="admonition tip">
+<p class="admonition-title">Example 提示</p>
+<p>在本节的例子中我们主要的情景建立在如下的银行例子上</p>
+<ul>
+<li>branch(branch-name, branch-city, assets) </li>
+<li>customer(customer-name, customer-street, customer-city) </li>
+<li>account(account-number, branch-name, balance) </li>
+<li>loan(loan-number, branch-name, amount) </li>
+<li>depositor(customer-name, account-number) </li>
+<li>borrower(customer-name, loan-number)</li>
+</ul>
+<p><img alt="" src="../assets/1.png" /></p>
+</div>
+<h2 id="data-definition-language">Data Definition Language<a class="headerlink" href="#data-definition-language" title="Permanent link">&para;</a></h2>
+<p>DDL 在数据库中是用于定义数据库结构与数据库对象(schema,domain,integrity constraints,physical storage,indices,view)的语言。在DDL中我们主要通过 <code>CREATE DROP ALTER</code>三个关键字来增/删/改。</p>
+<h3 id="domain-types">Domain Types<a class="headerlink" href="#domain-types" title="Permanent link">&para;</a></h3>
+<p>Domain 用于限定数据库中元素的“范围”</p>
+<ul>
+<li>char: 定长的字符串（用户指定）</li>
+<li>varchar: 不定长的字符串（用户指定最大长度）</li>
+<li>int: 整数（具体的位数由运行的机器限制）</li>
+<li>smallint: 小整数（具体的位数由运行的机器限制）</li>
+<li>numeric(p,d): 固定小数点的实数，由用户指定精度 p 和 小数位数 d </li>
+<li>real,double precision: 浮点数，与IEEE标准相同</li>
+<li>float(n)：固定精度浮点数</li>
+<li>Null valus: 空值</li>
+<li>date/time/timestamp: 日期(2025-3-3)、时间(18:45:02)、时间戳(2025-3-3 18:45:02)</li>
+</ul>
+<p>关于这些 Type 的实现，你可以在 <a href="https://15445.courses.cs.cmu.edu/fall2023/slides/04-storage2.pdf" title="真得是仙品">CMU 15/445 Database Storage</a> 中查阅更多的细节（底层的实现与考量）</p>
+<p>这里我们额外讨论一下 NULL这种特殊的类型。NULL一般用于只带未知的值或者值不存在。</p>
+<ul>
+<li>任何对于NULL的算术运算将会返还NULL</li>
+<li>任何对于NULL的比较运算将会返还NULL</li>
+<li>对于NULL的逻辑运算如下：<ul>
+<li>OR:  <ul>
+<li>(unknown or true) = true </li>
+<li>(unknown or false) = unknown </li>
+<li>(unknown or unknown) = unknown </li>
+</ul>
+</li>
+<li>AND:  <ul>
+<li>(true and unknown) = unknown </li>
+<li>(false and unknown) = false </li>
+<li>(unknown and unknown) = unknown </li>
+</ul>
+</li>
+<li>NOT: (not unknown) = unknown</li>
+</ul>
+</li>
+</ul>
+<p>我们可以通过 <code>IS NULL</code> 来检查是否是空值（这里不用等号，因为 NULL = ？ 没有意义）</p>
+<p>但是，聚合函数会直接忽略掉所有的空值</p>
+<h3 id="tables">Tables<a class="headerlink" href="#tables" title="Permanent link">&para;</a></h3>
+<p>我们可以通过 <code class="language-sql highlight"><span class="k">CREATE</span><span class="w"> </span><span class="k">Table</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">(</span><span class="n">Attr1</span><span class="w"> </span><span class="n">Domain1</span><span class="w"> </span><span class="n">Constraint1</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span></code> 来创建不同的表格。</p>
+<p>其中 Constraint 包含:</p>
+<ul>
+<li>Not null 非空</li>
+<li>Primary key 指定这个属性为主键(当然主键一定非空)</li>
+<li>Check (P) 要求填入表格的值符合谓语P</li>
+</ul>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">branch2</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">(</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">branch_name</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">branch_city</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">assets</span><span class="w">      </span><span class="nb">integer</span><span class="p">,</span><span class="w"> </span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="k">check</span><span class="w"> </span><span class="p">(</span><span class="n">assets</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="p">);</span><span class="w"> </span>
+</span></code></pre></div>
+<p>我们可以通过 <code class="language-sql highlight"><span class="k">DROP</span><span class="w"> </span><span class="k">Table</span><span class="w"> </span><span class="n">name</span></code> 来删除表格。
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">branch2</span><span class="p">;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">bank</span><span class="p">.</span><span class="n">branch2</span><span class="p">;</span><span class="w">   </span><span class="o">#</span><span class="err">删除</span><span class="n">bank数据库中的branch2表格</span>
+</span></code></pre></div></p>
+<p>我们可以通过 <code class="language-sql highlight"><span class="k">ALTER</span><span class="w"> </span><span class="k">Table</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">(</span><span class="n">Attr1</span><span class="w"> </span><span class="n">Domain1</span><span class="w"> </span><span class="n">Constraint1</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span></code> 来为表格增加属性；<code class="language-sql highlight"><span class="k">DROP</span><span class="w"> </span><span class="k">Table</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">Attr1</span></code> 来为表格删除属性。我们可以通过 <code class="language-sql highlight"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="k">MODIFY</span><span class="w"> </span><span class="p">(</span><span class="n">Attr1</span><span class="w"> </span><span class="n">Domain1</span><span class="w"> </span><span class="n">Constraint1</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span></code> 来修改表格的属性。</p>
+<h3 id="index">Index<a class="headerlink" href="#index" title="Permanent link">&para;</a></h3>
+<p class="annotate">Index索引是通过在部分属性建立数据结构（通常是 HashTable 与 B+Tree）的方法来增快部分数据的查询速度(1)。</p>
+<ol>
+<li><a href="../../../metacourses/CMU%2015-445/lec5/">CMU 15/445 Hash Table Index</a> 和 <a href="../../../metacourses/CMU%2015-445/lec6/">CMU 15/445 B+Tree Index</a></li>
+</ol>
+<p>我们可以通过 <code>CREATE</code> 和 <code>DROP</code> 来增加和删除 INDEX</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">b_index</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="p">(</span><span class="n">branch_name</span><span class="p">);</span><span class="w"> </span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">cust_strt_city_index</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">customer</span><span class="w"> </span><span class="p">(</span><span class="n">customer_city</span><span class="p">,</span><span class="w"> </span><span class="n">customer_street</span><span class="p">);</span><span class="w"> </span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">b_index</span><span class="p">;</span><span class="w"> </span>
+</span></code></pre></div>
+<h2 id="data-manipulation-language">Data Manipulation Language<a class="headerlink" href="#data-manipulation-language" title="Permanent link">&para;</a></h2>
+<h3 id="select-clause">Select Clause<a class="headerlink" href="#select-clause" title="Permanent link">&para;</a></h3>
+<p>从某种意义而言 Select 语句相当于关系代数中的 <span class="arithmatex">\(\prod_{attr}\)</span>。</p>
+<p>我们可以直接直接通过属性的名字来进行选择（选择的内容可以是某个属性，也可以是经过运算的结果，可以是某些函数...）；可以通过 DISTINCT 关键字来对选择的属性进行去重；而关键字 * 则代表所有属性。
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">branch_name</span><span class="w"> </span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">loan</span><span class="w"> </span><span class="p">;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">branch_name</span><span class="w"> </span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">FROM</span><span class="w"> </span><span class="n">loan</span><span class="w"> </span><span class="p">;</span>
+</span></code></pre></div></p>
+<h3 id="from-clause">From Clause<a class="headerlink" href="#from-clause" title="Permanent link">&para;</a></h3>
+<p>FROM Clause可以表明在查询中涉及的关系（这个关系可以是单张表格、多张表格、甚至是另一个查询运算的结果）。当FROM选定多个表格时，可以表示它们的笛卡尔积，例如<code class="language-sql highlight"><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">borrower</span><span class="p">,</span><span class="w"> </span><span class="n">loan</span></code> 即为 <span class="arithmatex">\(borrower \times loan\)</span></p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>Find the customer name, loan number and loan amount of all customers having a loan at the Perryridge branch. </p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">customer_name</span><span class="p">,</span><span class="w"> </span><span class="n">borrower</span><span class="p">.</span><span class="n">loan_number</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w"> </span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">FROM</span><span class="w">   </span><span class="n">borrower</span><span class="p">,</span><span class="w"> </span><span class="n">loan</span><span class="w"> </span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">WHERE</span><span class="w">  </span><span class="n">borrower</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loan</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="k">and</span><span class="w"> </span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">            </span><span class="n">branch_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">‘</span><span class="n">Perryridge</span><span class="err">’</span><span class="w"> </span>
+</span></code></pre></div>
+</div>
+<h3 id="rename-option">Rename Option<a class="headerlink" href="#rename-option" title="Permanent link">&para;</a></h3>
+<p>我们可以通过 <code>AS</code> 关键字对表格、属性取一个别名。重命名的操作可以出现在多个地方：可以出现在 Select 中为属性重命名；可以在 From 中为表格重命名...其中，在From从句的命名尤为重要，它可以用于在求一个表格与自身的笛卡尔积中消除歧义。</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">customer_name</span><span class="p">,</span><span class="w"> </span><span class="n">borrower</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">loan_id</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="w">  </span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">borrower</span><span class="p">,</span><span class="w"> </span><span class="n">loan</span><span class="w"> </span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">borrower</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">loan</span><span class="p">.</span><span class="n">loan_number</span><span class="p">;</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">customer_name</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">.</span><span class="n">loan_number</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">amount</span><span class="w"> </span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">   </span><span class="k">FROM</span><span class="w"> </span><span class="n">borrower</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">loan</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">S</span><span class="w"> </span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">   </span><span class="k">WHERE</span><span class="w"> </span><span class="n">T</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="p">;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">T</span><span class="p">.</span><span class="n">branch_name</span><span class="w"> </span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">S</span><span class="w"> </span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">T</span><span class="p">.</span><span class="n">assets</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">assets</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">branch_city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">‘</span><span class="n">Brooklyn</span><span class="err">’</span><span class="w"> </span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="string-option">String Option<a class="headerlink" href="#string-option" title="Permanent link">&para;</a></h3>
+<p>由于不同的DBMS实现的问题，在字符串上的操作有着很大的不同。仅在字符串的拼接上，就出现了 <code>+``||</code> <code>strcat</code> 等多种不同的方式。但总体而言他们都指代着同一种功能。所以我们以课件上介绍的为准。</p>
+<p>SQL提供了字符串匹配的运算符，用于字符串的查找(需要通过 LIKE 关键字进行):</p>
+<ul>
+<li>
+<p>'%' 可以匹配任意的子串 </p>
+</li>
+<li>
+<p>'_' 可以匹配任意的字符</p>
+</li>
+</ul>
+<p>SQL中可以通过<code>||</code> 进行字符串的连接；可以通过 <code>LOWER</code> 和 <code>UPPER</code> 进行大小写的转换；可以通过 <code>SUBSTR(pos,len)</code> 进行子串的裁剪；可以通过 <code>LEN</code> 来查看字符串的长度。</p>
+<h3 id="order-by">Order By<a class="headerlink" href="#order-by" title="Permanent link">&para;</a></h3>
+<p>我们可以通过 ORDER 关键字来实现排序。我们所指定的类型需要具有可排序的性质。
+我们可以根据多个属性进行排序，即当当前属性相同时，按照下一属性进行排序；同时可以在属性后加上关键字 <code>DESC</code> 来表明该属性按照降序排序。 
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">borrower</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">loan</span><span class="w"> </span><span class="n">B</span><span class="w"> </span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">        </span><span class="k">WHERE</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">B</span><span class="p">.</span><span class="n">loan_number</span><span class="w"> </span><span class="k">and</span><span class="w"> </span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">             </span><span class="n">branch_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">‘</span><span class="n">Perryridge</span><span class="err">’</span><span class="w"> </span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">    </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">customer_name</span><span class="err">；</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">customer</span><span class="w"> </span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">customer_city</span><span class="p">,</span><span class="w"> </span><span class="n">customer_street</span><span class="w"> </span><span class="k">desc</span><span class="p">,</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span>
+</span></code></pre></div></p>
+<h3 id="set-operations">Set Operations<a class="headerlink" href="#set-operations" title="Permanent link">&para;</a></h3>
+<p>在 SQL 中，我们可以用 <code>UNION</code> 来执行 <span class="arithmatex">\(\cup\)</span> 操作；可以用 <code>INTERSECT</code> 来执行 <span class="arithmatex">\(\cap\)</span> 操作；可以使用 <code>EXCEPT</code> 来执行 <code>-</code> 操作。但由于集合的性质，这三个操作保证一定会消除相同的元组的复制。当我们想要保留所有的元组的复制时，我们需要加上<code>ALL</code>关键字来保证其不会消除复制。</p>
+<p>在这里同样存在“方言”的问题：Oracle通过 MINUS 来实现 EXCEPT；SQL Server 仅支持 UNION。</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">depositor</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">UNION</span><span class="w"> </span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">borrower</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">depositor</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="k">INTERSECT</span><span class="w"> </span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">customer_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">borrower</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="aggregate-functions">Aggregate Functions<a class="headerlink" href="#aggregate-functions" title="Permanent link">&para;</a></h3>
+<p>我们可以通过 Aggregate Functions 对表格中的元素进行函数操作:</p>
+<ul>
+<li>avg(col): average value </li>
+<li>min(col): minimum value </li>
+<li>max(col): maximum value </li>
+<li>sum(col): sum of values </li>
+<li>count(col): number of values </li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>一个非常重要的点是：当我们的 SELECT 中同时选中了返回单一值的对列的 Aggregate Function 和 某一列属性时，需要通过 GROUP BY 来使得查询有意义；这是因为返回单一值与某一列的组合是没有意义的。</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">branch_name</span><span class="p">,</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">balance</span><span class="p">)</span><span class="w"> </span><span class="n">avg_bal</span><span class="w"> </span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">account</span><span class="w"> </span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">branch_name</span><span class="w"> </span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">branch_name</span><span class="p">,</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">customer_name</span><span class="p">)</span><span class="w"> </span><span class="n">tot_num</span><span class="w"> </span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">depositor</span><span class="p">,</span><span class="w"> </span><span class="n">account</span><span class="w"> </span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">depositor</span><span class="p">.</span><span class="n">account_number</span><span class="o">=</span><span class="n">account</span><span class="p">.</span><span class="n">account_number</span><span class="w"> </span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">  </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">branch_name</span><span class="w"> </span>
+</span></code></pre></div>
+</div>
+<p>GROUP BY 返回的值同样可以作为我们的选择条件之一，此时这个条件需要放到 HAVING 从句中。所有的聚合函数的结果的筛选都需要放入 Having 中，因为 Having 从句代表对分组后的结果进行筛选；而 Where 语句代表对分组前的数据进行筛选。</p>
+<h3 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
+<p>事实上，我们执行一个 SELECT 查询的顺序为：</p>
+<p><code class="language-sql highlight"><span class="k">FROM</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="p">(</span><span class="k">AGGREGATE</span><span class="p">)</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">HAVING</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span></code></p>
+<h2 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="页脚" >
+        
+          
+          <a href="../%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Lec1 关系模型">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              <div class="md-ellipsis">
+                Lec1 关系模型
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 | Ptiris
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.code.select", "content.tooltips", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "navigation.path", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
