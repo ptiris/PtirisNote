@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../intro2CA/">
+        <link rel="prev" href="../lec1/">
       
       
-        <link rel="next" href="../lec2/">
+        <link rel="next" href="../../databases/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Lec1 Fundamentals of design - Ptiris' Note</title>
+        <title>Lec2 Pipling - Ptiris' Note</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#fundamentals-of-computer-design" class="md-skip">
+        <a href="#pipeline" class="md-skip">
           跳转至
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lec1 Fundamentals of design
+              Lec2 Pipling
             
           </span>
         </div>
@@ -490,6 +490,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../lec1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec1 Fundamentals of design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -506,7 +527,7 @@
           
   
   <span class="md-ellipsis">
-    Lec1 Fundamentals of design
+    Lec2 Pipling
   </span>
   
 
@@ -517,7 +538,7 @@
         
   
   <span class="md-ellipsis">
-    Lec1 Fundamentals of design
+    Lec2 Pipling
   </span>
   
 
@@ -539,61 +560,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#performance" class="md-nav__link">
+  <a href="#buffer" class="md-nav__link">
     <span class="md-ellipsis">
-      Performance
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Performance">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#execution-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Execution Time
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quantitative-approaches" class="md-nav__link">
-    <span class="md-ellipsis">
-      Quantitative approaches
+      Buffer
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#instruction-set" class="md-nav__link">
+  <a href="#characteristics-of-pipelining" class="md-nav__link">
     <span class="md-ellipsis">
-      Instruction Set
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Instruction Set">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#instruction-set-design-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      Instruction Set Design Issues
+      Characteristics of pipelining
     </span>
   </a>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-evaluation-of-pipelining" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance evaluation of pipelining
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance evaluation of pipelining">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#isa-classes" class="md-nav__link">
+  <a href="#throughput" class="md-nav__link">
     <span class="md-ellipsis">
-      ISA Classes
+      Throughput
     </span>
   </a>
   
@@ -608,27 +605,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../lec2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec2 Pipling
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -793,61 +769,37 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#performance" class="md-nav__link">
+  <a href="#buffer" class="md-nav__link">
     <span class="md-ellipsis">
-      Performance
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Performance">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#execution-time" class="md-nav__link">
-    <span class="md-ellipsis">
-      Execution Time
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quantitative-approaches" class="md-nav__link">
-    <span class="md-ellipsis">
-      Quantitative approaches
+      Buffer
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#instruction-set" class="md-nav__link">
+  <a href="#characteristics-of-pipelining" class="md-nav__link">
     <span class="md-ellipsis">
-      Instruction Set
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Instruction Set">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#instruction-set-design-issues" class="md-nav__link">
-    <span class="md-ellipsis">
-      Instruction Set Design Issues
+      Characteristics of pipelining
     </span>
   </a>
   
 </li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-evaluation-of-pipelining" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance evaluation of pipelining
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Performance evaluation of pipelining">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#isa-classes" class="md-nav__link">
+  <a href="#throughput" class="md-nav__link">
     <span class="md-ellipsis">
-      ISA Classes
+      Throughput
     </span>
   </a>
   
@@ -873,91 +825,65 @@
                   
 
 
-<h1 id="fundamentals-of-computer-design">Fundamentals of Computer Design<a class="headerlink" href="#fundamentals-of-computer-design" title="Permanent link">&para;</a></h1>
-<h2 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h2>
-<p>影响性能的几个原因：</p>
+<h1 id="pipeline">Pipeline<a class="headerlink" href="#pipeline" title="Permanent link">&para;</a></h1>
+<p>我们已经在计组中学习过了基础的流水线，但我们在体系中将会更深入的流水线。</p>
+<p>从机器的角度而言，加速指令的执行一般有两种方法：</p>
 <ul>
-<li>Architecture</li>
-<li>Hardware implementation</li>
-<li>Compiler for Architecture</li>
-<li>Operating System</li>
-</ul>
-<p>对于不同的需求，我们需要定义不同的衡量性能的标准</p>
-<ul>
-<li>对于单一的用户而言，我们需要更快地反应时间 Response Time<ul>
-<li>Latency ： the time between the start and completion of an event</li>
+<li>减少单个指令执行的时间<ul>
+<li>性能更高的设备 More high-speed devices</li>
+<li>更好地计算方法 Better calculation methods</li>
+<li>提升指令内的并行 Improve the parallelism of each microoperation in the instruction</li>
 </ul>
 </li>
-<li>对于大量数据而言，我们需要更大的吞吐量 Throughput <ul>
-<li>Total work per unit time</li>
+<li>减少整个程序运行的时间</li>
 </ul>
-</li>
-</ul>
-<h3 id="execution-time">Execution Time<a class="headerlink" href="#execution-time" title="Permanent link">&para;</a></h3>
-<p>我们可以使用执行时间来衡量性能：$ Performance = \frac{1}{Execution Time} $</p>
-<ul>
-<li>Elapsed time：总的消耗时间，包括各个方面</li>
-<li>CPU time: 在给定任务上消耗的时间<ul>
-<li>User Cpu Time : 用户使用的 Cpu 时间</li>
-<li>System Cpu Time ： 系统消耗的 Cpu 时间</li>
-</ul>
-</li>
-</ul>
+<p>事实上，流水线是一种“伪并行”</p>
 <div class="admonition quote">
 <p class="admonition-title">Quote</p>
-<p>The main goal of architecture improvement is to improve the performance of the system.</p>
+<p>Pipelining is an implementation technique whereby multiple
+instructions are overlapped in execution; it takes advantage of
+parallelism that exists among the actions needed to execute an
+instruction.</p>
 </div>
-<h2 id="quantitative-approaches">Quantitative approaches<a class="headerlink" href="#quantitative-approaches" title="Permanent link">&para;</a></h2>
-<p>Measuring Data Size 衡量数据量大小</p>
+<p>在流水线中，我们有三种执行模式</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="pipeline-sequential-execution" name="__tabbed_1" type="radio" /><input id="pipeline-single-overlapping-execution" name="__tabbed_1" type="radio" /><input id="pipeline-twice-overlapping-execution" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="pipeline-sequential-execution">Sequential execution</label><label for="pipeline-single-overlapping-execution">Single Overlapping execution</label><label for="pipeline-twice-overlapping-execution">Twice Overlapping execution</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><img alt="" src="../assets/CAlec201.png" /></p>
+<p>指令按顺序执行，没有查重叠的部分。总时间为：</p>
+<div class="arithmatex">\[ T = \sum_{i=0}^n (t_{IF} + t_{ID} + t_{EX}) \]</div>
+</div>
+<div class="tabbed-block">
+<p><img alt="" src="../assets/CAlec202.png" /></p>
+<p>有且仅有一个重叠部分，但是当且仅当指令时间相同时才能够达到最优的效率；否则可能会出现浪费资源或者资源竞争的情况。</p>
+</div>
+<div class="tabbed-block">
+<p><img alt="" src="../assets/CAlec203.png" /></p>
+</div>
+</div>
+</div>
+<p>为了解决读写指令与内存的冲突的问题，我们需要额外添加 Buffer Pool 来加快IF段的时间。当BufferPool有空闲时，内存可以一直向Buffer中写入指令，使得IF更快地取指。</p>
+<h3 id="buffer">Buffer<a class="headerlink" href="#buffer" title="Permanent link">&para;</a></h3>
+<p><img alt="" src="../assets/CAlec204.png" /></p>
+<p>此时IF阶段变短后我们可以近乎忽略,则 Twice Overlapping 几乎变成了 Single Overlapping 的情况。此时可以简化 Twice Overlapping 带来的硬件成本。</p>
+<p><img alt="" src="../assets/CAlec205.png" /></p>
+<p>我们同样也可以将这样的设计逻辑添加到ID阶段。例如这里额外新增了3个Buffer，来平衡各个阶段时间的差异。（可以看到这里ID不再需要等待EX阶段结束再执行）</p>
+<p><img alt="" src="../assets/CAlec206.png" /></p>
+<h3 id="characteristics-of-pipelining">Characteristics of pipelining<a class="headerlink" href="#characteristics-of-pipelining" title="Permanent link">&para;</a></h3>
 <ul>
-<li>bit: A sigle binary digit</li>
-<li>nibble: Four bits</li>
-<li>byte: Eight bits</li>
-<li>word: four bytes</li>
-<li>kibibyte: <span class="arithmatex">\(2^{10}\)</span> bytes</li>
-</ul>
-<p>Formula for CPU performance</p>
-<div class="arithmatex">\[CPU Execution Time = CPU Clock Cycles \times Clock Peroid\]</div>
-<div class="arithmatex">\[CPU Execution Time = CPU Clock Cycles \times \frac{1}{Clock Rate}\]</div>
-<div class="arithmatex">\[CPU Time = InstructionCount \times CPI \times CLock Peroid\]</div>
-<div class="arithmatex">\[CPU Time =\frac {Instruction Count \times CPI }{Clock Rate}\]</div>
-<p>Amdahl's Law</p>
-<p>阿姆达尔定律，一个计算机科学界的经验法则。它代表了处理器并行运算之后效率提升的能力。</p>
-<div class="arithmatex">\[T_{improved} = \frac{T_{affected}}{improvement factor} + T_{unaffected}\]</div>
-<h2 id="instruction-set">Instruction Set<a class="headerlink" href="#instruction-set" title="Permanent link">&para;</a></h2>
-<h3 id="instruction-set-design-issues">Instruction Set Design Issues<a class="headerlink" href="#instruction-set-design-issues" title="Permanent link">&para;</a></h3>
-<ul>
-<li>操作数在何处保存？<ul>
-<li>registers,memory,stack,accumulator</li>
-</ul>
-</li>
-<li>需要多少的显式的操作数？ （ISA的分类）<ul>
-<li>0,1,2,...</li>
-</ul>
-</li>
-<li>操作数的位置该如何确定？ （如何寻址）<ul>
-<li>regitster,immediate,indirect...</li>
-</ul>
-</li>
-<li>操作数的类型和大小？    （数据的表示）<ul>
-<li>byte,int,float,double,string,vector</li>
-</ul>
-</li>
-<li>支持哪些功能？          (指令的类型)<ul>
-<li>add,sub,mul,move,compare...</li>
+<li>Single function pipelining 单功能流水线</li>
+<li>Multi function pipelining  多功能流水线<ul>
+<li>Static Pipelining 静态流水线</li>
+<li>Dynamic pipelining 动态流水线</li>
 </ul>
 </li>
 </ul>
-<h3 id="isa-classes">ISA Classes<a class="headerlink" href="#isa-classes" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Stacck Architecture</li>
-<li>Accumulator Architecture</li>
-<li>Gerneral Purpose Regiter Architecture<ul>
-<li>Register-Memorty Architecture (任何指令都可以访问内存)</li>
-<li>Load-store Architecture (只有Load和Store可以访问)</li>
-</ul>
-</li>
-</ul>
+<p><img alt="" src="../assets/CAlec207.png" /></p>
+<h2 id="performance-evaluation-of-pipelining">Performance evaluation of pipelining<a class="headerlink" href="#performance-evaluation-of-pipelining" title="Permanent link">&para;</a></h2>
+<h3 id="throughput">Throughput<a class="headerlink" href="#throughput" title="Permanent link">&para;</a></h3>
+<div class="arithmatex">\[ TP = \frac{n}{T_k} \]</div>
+<p><img alt="" src="../assets/CAlec208.png" /></p>
+<p>当任务数远大于阶段数时，吞吐量将会受限于瓶颈段（最长的阶段）</p>
 
 
 
@@ -993,7 +919,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../intro2CA/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Introduction">
+          <a href="../lec1/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Lec1 Fundamentals of design">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1003,20 +929,20 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                Introduction
+                Lec1 Fundamentals of design
               </div>
             </div>
           </a>
         
         
           
-          <a href="../lec2/" class="md-footer__link md-footer__link--next" aria-label="下一页: Lec2 Pipling">
+          <a href="../../databases/" class="md-footer__link md-footer__link--next" aria-label="下一页: 数据库系统">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                Lec2 Pipling
+                数据库系统
               </div>
             </div>
             <div class="md-footer__button md-icon">
