@@ -53,3 +53,28 @@ Amdahl's Law
 阿姆达尔定律，一个计算机科学界的经验法则。它代表了处理器并行运算之后效率提升的能力。
 
 $$T_{improved} = \frac{T_{affected}}{improvement factor} + T_{unaffected}$$
+
+
+## Instruction Set 
+
+### Instruction Set Design Issues
+
+- 操作数在何处保存？
+    + registers,memory,stack,accumulator
+- 需要多少的显式的操作数？ （ISA的分类）
+    + 0,1,2,...
+- 操作数的位置该如何确定？ （如何寻址）
+    + regitster,immediate,indirect...
+- 操作数的类型和大小？    （数据的表示）
+    + byte,int,float,double,string,vector
+- 支持哪些功能？          (指令的类型)
+    + add,sub,mul,move,compare...
+
+### ISA Classes
+- Stacck Architecture
+- Accumulator Architecture
+- Gerneral Purpose Regiter Architecture
+    + Register-Memorty Architecture (任何指令都可以访问内存)
+    + Load-store Architecture (只有Load和Store可以访问)
+
+
