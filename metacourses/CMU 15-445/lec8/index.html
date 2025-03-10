@@ -9,22 +9,22 @@
       
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../lec7/">
       
       
-        <link rel="next" href="lec1/">
+        <link rel="next" href="../../../system/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
     
     
       
-        <title>CMU 15-445 Database Systems - Ptiris' Note</title>
+        <title>Lec8 Sorting and Aggregation Algorithms - Ptiris' Note</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
       
       
 
@@ -43,7 +43,7 @@
       
     
     
-      <link rel="stylesheet" href="../../css/custom.css">
+      <link rel="stylesheet" href="../../../css/custom.css">
     
       <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
@@ -53,7 +53,7 @@
     
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#cmu-15-445-database-systems" class="md-skip">
+        <a href="#sorting-and-aggregations" class="md-skip">
           跳转至
         </a>
       
@@ -88,7 +88,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href="../.." title="Ptiris&#39; Note" class="md-header__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
+    <a href="../../.." title="Ptiris&#39; Note" class="md-header__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32v192c0 53 43 96 96 96h192c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48h-16v-96zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"/></svg>
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CMU 15-445 Database Systems
+              Lec8 Sorting and Aggregation Algorithms
             
           </span>
         </div>
@@ -178,7 +178,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../.." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -199,7 +199,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+        <a href="../../" class="md-tabs__link">
           
   
     
@@ -219,7 +219,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../system/" class="md-tabs__link">
+        <a href="../../../system/" class="md-tabs__link">
           
   
     
@@ -260,7 +260,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Ptiris&#39; Note" class="md-nav__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
+    <a href="../../.." title="Ptiris&#39; Note" class="md-nav__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32v192c0 53 43 96 96 96h192c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48h-16v-96zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"/></svg>
@@ -278,7 +278,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -330,7 +330,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="../" class="md-nav__link ">
+            <a href="../../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -409,7 +409,7 @@
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../" class="md-nav__link ">
               
   
   <span class="md-ellipsis">
@@ -420,7 +420,7 @@
             </a>
             
               
-              <label class="md-nav__link md-nav__link--active" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
@@ -442,7 +442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lec1/" class="md-nav__link">
+      <a href="../lec1/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -463,7 +463,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lec2/" class="md-nav__link">
+      <a href="../lec2/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -484,7 +484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lec3/" class="md-nav__link">
+      <a href="../lec3/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -505,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lec4/" class="md-nav__link">
+      <a href="../lec4/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -526,7 +526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lec5/" class="md-nav__link">
+      <a href="../lec5/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -547,7 +547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lec6/" class="md-nav__link">
+      <a href="../lec6/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -568,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="lec7/" class="md-nav__link">
+      <a href="../lec7/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -586,10 +586,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="lec8/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Lec8 Sorting and Aggregation Algorithms
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -598,6 +618,68 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-memory-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      In Memory Sorting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#external-memory-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      External Memory Sorting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hashing-aggregate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hashing Aggregate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hashing Aggregate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      External Hashing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -653,7 +735,7 @@
         
   
   
-    <a href="../../system/" class="md-nav__link">
+    <a href="../../../system/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -692,6 +774,56 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#in-memory-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      In Memory Sorting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#external-memory-sorting" class="md-nav__link">
+    <span class="md-ellipsis">
+      External Memory Sorting
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hashing-aggregate" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hashing Aggregate
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Hashing Aggregate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-hashing" class="md-nav__link">
+    <span class="md-ellipsis">
+      External Hashing
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -705,22 +837,89 @@
                   
 
 
-<h1 id="cmu-15-445-database-systems">CMU 15-445 Database Systems<a class="headerlink" href="#cmu-15-445-database-systems" title="Permanent link">&para;</a></h1>
-<div class="admonition abstract">
-<p class="admonition-title">Abstract</p>
-<p>点击 <a href="https://csdiy.wiki/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F/15445/">这里</a>可以跳转到 CSDIY 中的记录。</p>
-<p>笔者修习的版本是 <a href="https://15445.courses.cs.cmu.edu/fall2023/">Fall 2023</a>。课程视频可以在 <a href="https://www.bilibili.com/video/BV1Ex4y1p7bi">bilibili</a> 中找到中文字幕版。与课程相关的资源均可以在课程网站和 github 中找到。</p>
-<p>笔者也是数据库系统的初学者，所以如果有任何的问题，请指出并联系我</p>
+<h1 id="sorting-and-aggregations">Sorting And Aggregations<a class="headerlink" href="#sorting-and-aggregations" title="Permanent link">&para;</a></h1>
+<p>在本讲中我们将会讨论我们先前所提到的数据库模型中的第四层： <strong>Operator Execution</strong></p>
+<p>当我们假设我们已经通过关系代数的化简的方式对我们的查询进行优化后，我们该如何在数据库系统中执行某个具体的算法来实现对应的关系算符？</p>
+<p>在优化后我们的关系计算可以表示为一个 Tree (对于存在嵌套查询的情况，可能是一个 DAG )。所以我们一定存在某一种计算顺序能够使得我们从下而上的执行，最终在根节点得到我们的结果。</p>
+<p>例如我们有一个查询 <code class="language-sql highlight"><span class="k">SELECT</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">cdate</span><span class="w">  </span><span class="k">FROM</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">S</span><span class="w">  </span><span class="k">ON</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="n">value</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span></code> 可以表示为：</p>
+<p><center></p>
+<p><pre class="mermaid"><code>stateDiagram-v2
+
+    R--&gt;⋈(r.id=s.id)
+    S--&gt;σ(value&gt;100)
+    σ(value&gt;100)--&gt;⋈(r.id=s.id)
+    ⋈(r.id=s.id)--&gt;π(r.id,s.cdate)
+</code></pre>
+</center></p>
+<p>在设计这样的算法时，我们需要注意到：</p>
+<ul>
+<li>我们不能假定所有的数据都在内存中，它有可能在硬盘中</li>
+<li>我们希望最大化顺序的IO</li>
+<li>对于溢出到磁盘中的数据我们希望能够用到缓冲池</li>
+</ul>
+<p>在原始的 Relational Model 的数据库中我们不需要进行关系的排序；但我们在数据库的实现中可能需要各种各样的排序：
+- 排序可以支持 <code>DISTINCT</code> 关键字去重
+- 排序可以支持 <code>GROUP BY</code> 关键字
+- 排序后的数据在建立 B+ 树索引时会更快</p>
+<h2 id="in-memory-sorting">In Memory Sorting<a class="headerlink" href="#in-memory-sorting" title="Permanent link">&para;</a></h2>
+<p>对于内存中的排序，我们有许多十分优秀的算法：快速排序、归并排序...</p>
+<p>对于绝大多数的数据库都是用的快速排序；对于部分的平台（例如python）则是使用的 TimSort </p>
+<h2 id="external-memory-sorting">External Memory Sorting<a class="headerlink" href="#external-memory-sorting" title="Permanent link">&para;</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="external-memory-sorting-top-n-heap-sort" name="__tabbed_1" type="radio" /><input id="external-memory-sorting-external-sorting" name="__tabbed_1" type="radio" /><input id="external-memory-sorting-b-tree-sorting" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="external-memory-sorting-top-n-heap-sort">Top-N Heap Sort</label><label for="external-memory-sorting-external-sorting">External Sorting</label><label for="external-memory-sorting-b-tree-sorting">B+ Tree Sorting </label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>当一个查询包含排序，并且限定了前 N 个结果时 (<code>LIMIT N</code>) 我们可以通过建立一个大小为 N 的堆来进行排序
+:例如如下的包含前六项的例子</p>
+<p><div class="language-SQL highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">enrolled</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">sid</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">FETCH</span><span class="w"> </span><span class="k">FIRST</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="k">ROWS</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">WITH</span><span class="w"> </span><span class="n">TIES</span>
+</span></code></pre></div>
+<img alt="" src="../assets/56.png" /></p>
 </div>
+<div class="tabbed-block">
+<p>这里的处理和我们在ADS课程中的处理是一模一样的.(包括 N-Way Sort 和 Read And Write Buffer)</p>
+</div>
+<div class="tabbed-block">
+<p>当我们在部分的Tuple上建立了索引之后,我们可以直接通过索引来进行排序.(e.g. B+ Tree).此时我们需要考虑两种情况:</p>
+<ul>
+<li>建立在聚合索引上的 B+ Tree</li>
+<li>建立在非聚合索引上的 B+ Tree</li>
+</ul>
+<p>当B+ Tree 建立在聚合索引上时,这意味着我们的数据是按照顺序排列的;所以我们可以从最左的页开始一次遍历排序.
+当B+ Tree 建立在非聚合索引上时,我们所有的数据是由乱序的指针所指引的.这将导致我们无法最大化顺序的 IO.</p>
+</div>
+</div>
+</div>
+<h2 id="hashing-aggregate">Hashing Aggregate<a class="headerlink" href="#hashing-aggregate" title="Permanent link">&para;</a></h2>
+<p>我们发现排序对于我们的数据的存储有着诸多的要求.那么有没有更多的实现 Aggregate 的算法呢?</p>
+<ul>
+<li>按照 Group By 进行分组</li>
+<li>按照 DISTINCT 去重</li>
+</ul>
+<p>在没有指定的顺序的情况下,实际上Hashing是一个更好的方法.但我们先前讨论的哈希的算法都是基于内存上的,和排序算法一样,在磁盘上的哈希会更加的复杂.</p>
+<h3 id="external-hashing">External Hashing<a class="headerlink" href="#external-hashing" title="Permanent link">&para;</a></h3>
+<p>由于磁盘与内存间的限制,我们需要将Hashing分为两个部分来讨论:</p>
+<ul>
+<li>Phase #1 Partition<ul>
+<li>将数据按照哈希的键值分组</li>
+<li>当内存满时写入磁盘</li>
+</ul>
+</li>
+<li>Phase #2 Rehash<ul>
+<li>对于每一个划分,我们建立 In-Memory 的哈希表</li>
+</ul>
+</li>
+</ul>
+<p>对于第一个阶段,我们采用第一个哈希函数 <span class="arithmatex">\(h_1\)</span> 将其分为不同的 Page 中.当我们有 B 个不同的 Buffer 时,我们用 B-1 个 Buffer 用作划分;剩余的Buffer用于Input.</p>
+<p><img alt="" src="../assets/57.png" /></p>
+<p>对于第二个阶段,我们使用另一个哈希函数 <span class="arithmatex">\(h_2\)</span> 建立 In-Memory 的哈希表,将符合条件的 Tuple 进行合并.我们更多的 Aggregate Function 也是建立在第二个阶段进行的(max,min,avg).</p>
 
 
 
 
 
 
-
-  
-  
 
 
 
@@ -750,7 +949,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一页: Meta">
+          <a href="../lec7/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Lec7 Concurrency Control">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -760,20 +959,20 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                Meta
+                Lec7 Concurrency Control
               </div>
             </div>
           </a>
         
         
           
-          <a href="lec1/" class="md-footer__link md-footer__link--next" aria-label="下一页: Lec1 Relational Model and Algebra">
+          <a href="../../../system/" class="md-footer__link md-footer__link--next" aria-label="下一页: Systems">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                Lec1 Relational Model and Algebra
+                Systems
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -813,12 +1012,12 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.code.select", "content.tooltips", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "navigation.path", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.code.select", "content.tooltips", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "navigation.path", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
-        <script src="../../javascripts/katex.js"></script>
+        <script src="../../../javascripts/katex.js"></script>
       
         <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
       
