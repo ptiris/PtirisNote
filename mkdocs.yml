@@ -117,6 +117,7 @@ nav:
       - Lec5 Hash Tables: metacourses/CMU 15-445/lec5.md 
       - Lec6 B plus Tree Index: metacourses/CMU 15-445/lec6.md
       - Lec7 Concurrency Control: metacourses/CMU 15-445/lec7.md
+      - Lec8 Sorting and Aggregation Algorithms: metacourses/CMU 15-445/lec8.md
   - System:
     - system/index.md
     - Computer Architecture:
