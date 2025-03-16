@@ -92,3 +92,4 @@ stateDiagram-v2
 ![](./assets/57.png)
 
 对于第二个阶段,我们使用另一个哈希函数 $h_2$ 建立 In-Memory 的哈希表,将符合条件的 Tuple 进行合并.我们更多的 Aggregate Function 也是建立在第二个阶段进行的(max,min,avg).
+
