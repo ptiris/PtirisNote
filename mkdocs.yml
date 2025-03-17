@@ -128,3 +128,4 @@ nav:
       - system/databases/index.md
       - Lec1 关系模型: system/databases/关系模型.md
       - Lec2 SQL语言: system/databases/SQL.md
+      - Lec3 Advanced SQL: system/databases/ASQL.md
