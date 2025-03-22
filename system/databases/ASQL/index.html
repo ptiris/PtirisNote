@@ -757,6 +757,84 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      授权
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="授权">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据安全
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view" class="md-nav__link">
+    <span class="md-ellipsis">
+      View与授权
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorization-grant-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization Grant Graph
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL 授权语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL Role
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL 授权的缺陷
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL 审计
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -857,6 +935,84 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       触发器
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      授权
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="授权">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      数据安全
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#view" class="md-nav__link">
+    <span class="md-ellipsis">
+      View与授权
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#authorization-grant-graph" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authorization Grant Graph
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL 授权语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL Role
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL 授权的缺陷
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sql_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL 审计
     </span>
   </a>
   
@@ -1007,6 +1163,71 @@
 <p class="admonition-title">Warning</p>
 <p>诚然 Trigger 十分强大,可以帮助我们维护数据,验证数据,实现日志等等...但是它也存在着诸多的问题,过多的触发器会降低数据库的性能,并且会增加调试的复杂度;不当的编写 Trigger甚至会导致循环递归的触发 Trigger.所以我们对 Trigger 的使用也需要谨慎.</p>
 </div>
+<h2 id="_6">授权<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h3 id="_7">数据安全<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>数据库系统有较为复杂的权限系统,这是因为我们需要从各种意义上保证数据的安全.</p>
+<ul>
+<li>数据库系统层面：授权机制保证只有被允许的用户能够访问/修改数据</li>
+<li>操作系统层面：操作系统的管理员可以做任何事,所以我们需要更好的管理操作系统的权限</li>
+<li>网络层面：需要是使用加密机制来避免数据泄漏和数据非法访问</li>
+<li>物理层面: 我们需要 lock-key 的机制来保证物理层面数据的安全性</li>
+</ul>
+<h3 id="view">View与授权<a class="headerlink" href="#view" title="Permanent link">&para;</a></h3>
+<p>我们的授权涉及各个方面,从数据的操作而言：Read/Insert/Delete/Update Auth;从数据存储的结构而言：Index/Resources/Alteration/Drop</p>
+<p>有时为了避免直接对于某些关系/表格的授权，我们可以创建一个View，只授予对于View的授权：假设一名银行职员需要知道每个分行的客户姓名，但没有权限查看具体的贷款信息。我们可以拒绝对贷款关系（loan 表）的直接访问权限，但授予对视图 cust-loan 的访问权限，该视图仅包含客户姓名和他们贷款所在的分行信息。</p>
+<h3 id="authorization-grant-graph">Authorization Grant Graph<a class="headerlink" href="#authorization-grant-graph" title="Permanent link">&para;</a></h3>
+<p>由于数据库管理是一个动态的过程，我们的授权可能呈现出一个图状的形式,例如:</p>
+<figure>
+<pre class="mermaid"><code>graph LR
+
+A[root] --&gt; B[User 1]
+A[root] --&gt; C[User 2]
+A[root] --&gt; D[User 3]
+B[User 1] --&gt; E[User 4]
+B[User 1] --&gt; F[User 5]
+C[User 2] --&gt; F[User 5]</code></pre>
+<figcaption>Authorization Grant Graph</figcaption>
+</figure>
+<p>如果此时我们撤销了对于User 1的授权，那么User 4的权限也将被取消，因为此时没有连接到root的路径。但是我们可以看到User 5还拥有权限，因为此时User 2对于User 5 的授权仍然有效</p>
+<h3 id="sql">SQL 授权语句<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h3>
+<p>在SQL中授权的语句格式为：<code class="language-sql highlight"><span class="k">GRANT</span><span class="w"> </span><span class="o">&lt;</span><span class="n">privilege</span><span class="w"> </span><span class="n">list</span><span class="o">&gt;</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">&lt;</span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">view</span><span class="o">&gt;</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">&lt;</span><span class="k">user</span><span class="w"> </span><span class="n">list</span><span class="o">&gt;</span></code></p>
+<p>其中<user list>可以是一个特定的用户,一个用户组,或者是一个<code>role</code>,也可以是public(对于所有人).</p>
+<p>常见的<privilege list>有<code class="language-sql highlight"><span class="k">Insert</span><span class="w"> </span><span class="p">,</span><span class="k">Delete</span><span class="w"> </span><span class="p">,</span><span class="k">Update</span><span class="w"> </span><span class="p">,</span><span class="n">Reference</span><span class="w"> </span><span class="p">,</span><span class="k">All</span><span class="w"> </span><span class="k">privileges</span></code></p>
+<p>在授权时我们可以在末尾加上<code>with grant option</code>,这意味着我们授权的用户可以将其手中的权利进行再次授权</p>
+<h3 id="sql-role">SQL Role<a class="headerlink" href="#sql-role" title="Permanent link">&para;</a></h3>
+<p>在实际的使用中,我们可能更倾向于将权限与职务相绑定,即我们的权限不面向特定的用户,而是面向特定的人.例如 <code>Bob</code> 也许是经理,但是当 <code>Alice</code> 来接替这一职务时我们不希望先从 Bob 中收回,再授予 Alice 相应的权利。SQL中允许我们创建并授予抽象的用户组 <code>Role</code> 的权利。</p>
+<div class="language-SQL highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">Create</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="n">teller</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">Create</span><span class="w"> </span><span class="k">role</span><span class="w"> </span><span class="n">manager</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">Grant</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">teller</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">Grant</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="p">(</span><span class="n">balance</span><span class="p">)</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">teller</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">Grant</span><span class="w"> </span><span class="k">all</span><span class="w"> </span><span class="k">privileges</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">manager</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">Grant</span><span class="w"> </span><span class="n">teller</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">manager</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="k">Grant</span><span class="w"> </span><span class="n">teller</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">alice</span><span class="p">,</span><span class="w"> </span><span class="n">bob</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">Grant</span><span class="w"> </span><span class="n">manager</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">avi</span><span class="p">;</span><span class="w"> </span>
+</span></code></pre></div>
+<h3 id="sql_1">SQL 授权的缺陷<a class="headerlink" href="#sql_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>SQL 的授权并不允许在元组级别进行管理(尽管通过 View 应该能做到这一点)</li>
+<li>随着Web服务的发展，现在所有的应用并不对应多个用户的权限了，而是统一映射到单个用户</li>
+<li>目前越来越多的权限授予与验证变为了应用层的任务,而非数据库的任务</li>
+</ul>
+<h3 id="sql_2">SQL 审计<a class="headerlink" href="#sql_2" title="Permanent link">&para;</a></h3>
+<p>Audit Trails 可以记录和跟踪数据库中所有用户活动，这可以帮助我们监控和记录数据库的访问与操作。例如,我们想要审计用户scott每次成功地执行有关table的语句：<code class="language-sql highlight"><span class="n">audit</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">scott</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">access</span><span class="w"> </span><span class="k">whenever</span><span class="w"> </span><span class="n">successful</span></code></p>
+<p>更具体而言,Audit的用法为<code class="language-sql highlight"><span class="n">AUDIT</span><span class="w"> </span><span class="o">&lt;</span><span class="n">obj</span><span class="o">-</span><span class="n">opt</span><span class="o">&gt;</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">&lt;</span><span class="n">obj</span><span class="o">&gt;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="p">[</span><span class="k">BY</span><span class="w"> </span><span class="k">SESSION</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">ACCESS</span><span class="p">]</span><span class="w">  </span><span class="p">[</span><span class="k">WHENEVER</span><span class="w"> </span><span class="n">SUCCESSFUL</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">WHENEVER</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="n">SUCCESSFUL</span><span class="p">]</span></code></p>
+<ul>
+<li>
+<p><code>&lt;obj-opt&gt;</code>指定要审计的操作类型，例如 SELECT、INSERT、UPDATE、DELETE 等。</p>
+</li>
+<li>
+<p><code>&lt;obj&gt;</code>表示审计的对象,例如表格,视图,触发器等.</p>
+</li>
+<li>
+<p><code>BY SESSION | BY ACCESS</code> 指定审计记录的粒度.</p>
+</li>
+<li>
+<p><code>WHENEVER SUCCESSFUL | WHENEVER NOT SUCCESSFUL</code> 指定是否记录成功或失败的操作.</p>
+</li>
+</ul>
 
 
 
