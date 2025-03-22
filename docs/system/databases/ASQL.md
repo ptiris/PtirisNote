@@ -158,3 +158,84 @@ CREATE TRIGGER overdraft-trigger AFTER UPDATE ON account
 !!! warning
     诚然 Trigger 十分强大,可以帮助我们维护数据,验证数据,实现日志等等...但是它也存在着诸多的问题,过多的触发器会降低数据库的性能,并且会增加调试的复杂度;不当的编写 Trigger甚至会导致循环递归的触发 Trigger.所以我们对 Trigger 的使用也需要谨慎.
 
+## 授权
+
+### 数据安全
+
+数据库系统有较为复杂的权限系统,这是因为我们需要从各种意义上保证数据的安全.
+
+- 数据库系统层面：授权机制保证只有被允许的用户能够访问/修改数据
+- 操作系统层面：操作系统的管理员可以做任何事,所以我们需要更好的管理操作系统的权限
+- 网络层面：需要是使用加密机制来避免数据泄漏和数据非法访问
+- 物理层面: 我们需要 lock-key 的机制来保证物理层面数据的安全性
+
+### View与授权
+我们的授权涉及各个方面,从数据的操作而言：Read/Insert/Delete/Update Auth;从数据存储的结构而言：Index/Resources/Alteration/Drop
+
+有时为了避免直接对于某些关系/表格的授权，我们可以创建一个View，只授予对于View的授权：假设一名银行职员需要知道每个分行的客户姓名，但没有权限查看具体的贷款信息。我们可以拒绝对贷款关系（loan 表）的直接访问权限，但授予对视图 cust-loan 的访问权限，该视图仅包含客户姓名和他们贷款所在的分行信息。
+
+### Authorization Grant Graph
+由于数据库管理是一个动态的过程，我们的授权可能呈现出一个图状的形式,例如:
+
+
+
+<figure markdown="span">
+```mermaid
+graph LR
+
+A[root] --> B[User 1]
+A[root] --> C[User 2]
+A[root] --> D[User 3]
+B[User 1] --> E[User 4]
+B[User 1] --> F[User 5]
+C[User 2] --> F[User 5]
+```
+<figcaption>Authorization Grant Graph</figcaption>
+</figure>
+
+如果此时我们撤销了对于User 1的授权，那么User 4的权限也将被取消，因为此时没有连接到root的路径。但是我们可以看到User 5还拥有权限，因为此时User 2对于User 5 的授权仍然有效
+
+### SQL 授权语句
+
+在SQL中授权的语句格式为：```#!sql GRANT <privilege list> ON <table | view> TO <user list> ```
+
+其中<user list>可以是一个特定的用户,一个用户组,或者是一个`role`,也可以是public(对于所有人).
+
+常见的<privilege list>有```#!sql Insert ,Delete ,Update ,Reference ,All privileges```
+
+在授权时我们可以在末尾加上```#! with grant option```,这意味着我们授权的用户可以将其手中的权利进行再次授权
+
+### SQL Role
+在实际的使用中,我们可能更倾向于将权限与职务相绑定,即我们的权限不面向特定的用户,而是面向特定的人.例如 `Bob` 也许是经理,但是当 `Alice` 来接替这一职务时我们不希望先从 Bob 中收回,再授予 Alice 相应的权利。SQL中允许我们创建并授予抽象的用户组 `Role` 的权利。
+
+```SQL
+Create role teller; 
+Create role manager; 
+Grant select on branch to teller; 
+Grant update (balance) on account to teller; 
+Grant all privileges on account to manager; 
+Grant teller to manager; 
+Grant teller to alice, bob; 
+Grant manager to avi; 
+```
+
+### SQL 授权的缺陷
+
+- SQL 的授权并不允许在元组级别进行管理(尽管通过 View 应该能做到这一点)
+- 随着Web服务的发展，现在所有的应用并不对应多个用户的权限了，而是统一映射到单个用户
+- 目前越来越多的权限授予与验证变为了应用层的任务,而非数据库的任务
+
+### SQL 审计
+
+Audit Trails 可以记录和跟踪数据库中所有用户活动，这可以帮助我们监控和记录数据库的访问与操作。例如,我们想要审计用户scott每次成功地执行有关table的语句：```#!sql audit table by scott by access whenever successful ```
+
+更具体而言,Audit的用法为```#!sql AUDIT <obj-opt> ON <obj> | DEFAULT [BY SESSION | BY ACCESS]  [WHENEVER SUCCESSFUL | WHENEVER NOT SUCCESSFUL] ```
+
+- ```<obj-opt>```指定要审计的操作类型，例如 SELECT、INSERT、UPDATE、DELETE 等。
+
+- ```<obj>```表示审计的对象,例如表格,视图,触发器等.
+
+- ```BY SESSION | BY ACCESS``` 指定审计记录的粒度.
+
+- ```WHENEVER SUCCESSFUL | WHENEVER NOT SUCCESSFUL``` 指定是否记录成功或失败的操作.
+
