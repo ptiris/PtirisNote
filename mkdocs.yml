@@ -119,6 +119,7 @@ nav:
       - Lec7 Concurrency Control: metacourses/CMU 15-445/lec7.md
       - Lec8 Sorting and Aggregation Algorithms: metacourses/CMU 15-445/lec8.md
       - Lec9 Join Algorithms: metacourses/CMU 15-445/lec9.md
+      - Lec10 Query Execution: metacourses/CMU 15-445/lec10.md
   - System:
     - system/index.md
     - Computer Architecture:
