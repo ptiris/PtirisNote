@@ -9,10 +9,8 @@
       
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../ASQL/">
       
-      
-        <link rel="next" href="../SQL/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -20,7 +18,7 @@
     
     
       
-        <title>Lec1 关系模型 - Ptiris' Note</title>
+        <title>Lec4 关系数据库设计 - Ptiris' Note</title>
       
     
     
@@ -72,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#introduction-to-database-systems" class="md-skip">
+        <a href="#relational-database-design" class="md-skip">
           跳转至
         </a>
       
@@ -108,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lec1 关系模型
+              Lec4 关系数据库设计
             
           </span>
         </div>
@@ -611,28 +609,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Lec1 关系模型
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -641,66 +621,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction-to-database-systems" class="md-nav__link">
-    <span class="md-ellipsis">
-      Introduction to Database Systems
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#data-models" class="md-nav__link">
-    <span class="md-ellipsis">
-      Data Models
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#relational-model" class="md-nav__link">
-    <span class="md-ellipsis">
-      Relational Model
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Relational Model">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      关系模型的结构
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -752,10 +672,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../RelationDesign/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Lec4 关系数据库设计
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -764,6 +704,143 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#preface" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preface
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decomposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decomposition
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Decomposition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lossless-join" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lossless-Join
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-preserving" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependency Preserving
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#functional-denpendency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functional Denpendency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Closure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#canonical-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      Canonical Cover
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normal-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normal Form
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Normal Form">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#third-normal-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Third Normal Form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boyce-codd-normal-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boyce-Codd Normal Form
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -801,6 +878,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -809,37 +888,112 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction-to-database-systems" class="md-nav__link">
+  <a href="#preface" class="md-nav__link">
     <span class="md-ellipsis">
-      Introduction to Database Systems
+      Preface
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#data-models" class="md-nav__link">
+  <a href="#decomposition" class="md-nav__link">
     <span class="md-ellipsis">
-      Data Models
+      Decomposition
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#relational-model" class="md-nav__link">
-    <span class="md-ellipsis">
-      Relational Model
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Relational Model">
+    <nav class="md-nav" aria-label="Decomposition">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
+  <a href="#lossless-join" class="md-nav__link">
     <span class="md-ellipsis">
-      关系模型的结构
+      Lossless-Join
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dependency-preserving" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependency Preserving
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dependency
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dependency">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#functional-denpendency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functional Denpendency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#closure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Closure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#canonical-cover" class="md-nav__link">
+    <span class="md-ellipsis">
+      Canonical Cover
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#normal-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normal Form
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Normal Form">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#third-normal-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Third Normal Form
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boyce-codd-normal-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boyce-Codd Normal Form
     </span>
   </a>
   
@@ -865,69 +1019,115 @@
                   
 
 
-  <h1>Lec1 关系模型</h1>
-
-<h2 id="introduction-to-database-systems">Introduction to Database Systems<a class="headerlink" href="#introduction-to-database-systems" title="Permanent link">&para;</a></h2>
+<h1 id="relational-database-design">Relational Database Design<a class="headerlink" href="#relational-database-design" title="Permanent link">&para;</a></h1>
+<h2 id="preface">Preface<a class="headerlink" href="#preface" title="Permanent link">&para;</a></h2>
+<p>我们之所以设计关系类型的数据库,目的之一是希望通过数据间隐含的约束关系来优化和管理我们的数据;例如,如果我们知道了学生的id,就可以知道学生的姓名,年龄,年级等其他的属性.</p>
+<p>一个＂不好＂的关系数据库的设计可能会导致：</p>
 <ul>
-<li>
-<p>对数据语义 (Data Semantics)的抽象，产生了关系数据模型</p>
-</li>
-<li>
-<p>对业务逻辑(Business Logic)的抽象，产生了事务处理模型</p>
-</li>
+<li>Information repetition (重复的存储数据)</li>
+<li>Insertion anomalies (插入异常,例如表格A与B中都存在学生id)</li>
+<li>Update difficulty (更新困难,例如表格A与B中都存在学生id)</li>
 </ul>
-<p>数据库是存在 <strong>内部关联的数据的集合</strong>（e.g. Excel Table），而数据库系统是 <strong>管理数据库的工具</strong>（e.g. MySQL,MiniSQL...）这两者有着本质的区别。</p>
-<p>数据库系统的特点</p>
+<p>所以我们希望能够设计一个好的关系的 Schemas(或者一种拆分的方法), 能够最小化存储的数据规模,简化插入与更新的同时最大化的保存了原始表格的信息(这些信息与关系可能是隐藏的)</p>
+<p>下面便是一个不好的关系数据库的例子,我们可以看到每一笔贷款都重复的存储了某些branch的名字;我们对于资产的更新更加困难;我们无法在不引进NULL的情况下插入某些数据.</p>
+<p><img alt="" src="../assets/02.png" /></p>
+<h2 id="decomposition">Decomposition<a class="headerlink" href="#decomposition" title="Permanent link">&para;</a></h2>
+<p>令 <span class="arithmatex">\(R\)</span> 是一个关系模式,<span class="arithmatex">\(R_1\)</span>和<span class="arithmatex">\(R_2\)</span>是<span class="arithmatex">\(R\)</span>的一个分解,那么有<span class="arithmatex">\(R = R_1 \cup R_2\)</span>,即<span class="arithmatex">\(R\)</span>所有的属性都在分解<span class="arithmatex">\((R_1,R_2)\)</span>中出现</p>
+<h3 id="lossless-join">Lossless-Join<a class="headerlink" href="#lossless-join" title="Permanent link">&para;</a></h3>
+<p>一个自然的想法是,一个好的 Decomposition 应该能够直接通过JOIN得到,这要求<span class="arithmatex">\(r = \prod_{R_1}(r) \Join \prod_{R_2}(r)\)</span></p>
+<p>一个等价的说法是:公共属性是其中一个关系的Key,即:</p>
 <ul>
-<li>Efficiency and scalability in data access.  效率与可扩展性</li>
-<li>Reduced application development time. 减少应用开发时间</li>
-<li>Data independence. 数据独立性</li>
-<li>Data integrity and security.  数据完整性和安全性</li>
-<li>Concurrent access and robustness. 并发访问和稳健性</li>
+<li><span class="arithmatex">\(R_1 \cap R_2 \rightarrow R_1\)</span></li>
+<li><span class="arithmatex">\(R_1 \cap R_2 \rightarrow R_2\)</span></li>
 </ul>
-<p>数据的独立性包含两个方面：Physical Independence &amp; Logical Independence</p>
-<h2 id="data-models">Data Models<a class="headerlink" href="#data-models" title="Permanent link">&para;</a></h2>
-<p>数据模型是一组用于描述数据结构、数据关系、数据语义、数据约束的概念</p>
-<p>常见的数据模型包含：</p>
+<p>我们称这样的分解为: Lossless-join decomposition 无损分解</p>
+<h3 id="dependency-preserving">Dependency Preserving<a class="headerlink" href="#dependency-preserving" title="Permanent link">&para;</a></h3>
+<p>在不同的属性间存在不同的关联,我们称这些关联为Dependency.例如sid 可以决定student_name和student_age.我们希望分解后,这些关联仍然存在.这样的分解称为Dependency Preserving Decomposition.</p>
+<p>可以看到,Dependency Preserving 是更加困难的性质;在后面我们可以知道,我们一定能够找到一个满足良好性质的Lossless-Join 的分解,但是有可能无法满足Dependency Preserving</p>
+<h2 id="dependency">Dependency<a class="headerlink" href="#dependency" title="Permanent link">&para;</a></h2>
+<p>在本节中,我们主要讨论两种Denpendency:</p>
 <ul>
-<li>实体-关系模型</li>
-<li>关系模型</li>
-<li>面向对象的模型</li>
-<li>Array / Matrix / Vectors 模型 （现在多用于机器学习）</li>
+<li>Functional Dependency (函数依赖)</li>
+<li>Multivalued Dependency (多值依赖)</li>
 </ul>
-<h2 id="relational-model">Relational Model<a class="headerlink" href="#relational-model" title="Permanent link">&para;</a></h2>
-<h3 id="_1">关系模型的结构<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<p>关系的定义: 给定集合 <span class="arithmatex">\(D_1,D_2,D_3...D_n\)</span> 关系 <span class="arithmatex">\(\textbf{R}\)</span> 即为笛卡尔积 <span class="arithmatex">\(D_1 \times D_2 \times ... \times D_n\)</span> 的一个子集, <span class="arithmatex">\(\textbf{R}\)</span>中的一个元素称为一个元组(Tuple),而一个元组中的一个元素成为属性(Attribute)</p>
-<div class="admonition warning">
-<p class="admonition-title">Attribute Types</p>
+<h3 id="functional-denpendency">Functional Denpendency<a class="headerlink" href="#functional-denpendency" title="Permanent link">&para;</a></h3>
+<p>函数依赖借助了数学上的函数的概念,即描述不同属性间的映射关系:</p>
+<p>如果对于任意的元组<span class="arithmatex">\(t_1\)</span> 和 <span class="arithmatex">\(t_2\)</span> 有</p>
+<div class="arithmatex">\[ t_1[\alpha] = t_2[\alpha] \Rightarrow t_1[\beta] = t_2[\beta]\]</div>
+<p>则称 <span class="arithmatex">\(\alpha \rightarrow \beta\)</span> 存在functional dependency.换言之,我们可以理解为<span class="arithmatex">\(\alpha\)</span> 可以确定<span class="arithmatex">\(\beta\)</span>.</p>
+<p>通过数据库的一些实例我们可以证明函数依赖不存在,但是我们不能证明函数依赖存在;因为依赖是来源于我们应用的规定的,这是先于数据库而存在的.</p>
+<p>这里的<span class="arithmatex">\(\alpha\)</span>与<span class="arithmatex">\(\beta\)</span>不应定是单一的属性,它可以是不同的属性的集合;<span class="arithmatex">\(A \rightarrow BC\)</span> 这样的依赖也是合法的.</p>
+<p>此时我们可以对我们之前的key概念作出更新的定义:</p>
 <ul>
-<li>每一个 Attribute 有一个名字</li>
-<li>Attribute 的取值范围成为值域；特别的,特殊值 null 属于每一个值域</li>
-<li>Attribute 必须是原子的（不可分割的）</li>
+<li>K is a superkey for relation schema <span class="arithmatex">\(R\)</span> if and only if <span class="arithmatex">\(K \rightarrow R\)</span></li>
+<li>K is a candidate key for R iff <span class="arithmatex">\(K \rightarrow R\)</span> and <span class="arithmatex">\(\neg \exists \alpha \in K , \alpha \rightarrow R\)</span></li>
 </ul>
+<p>很显然的是当包含关系存在时,函数依赖的导出是自然的,例如:<span class="arithmatex">\(\alpha \rightarrow \alpha\)</span>,我们称这样的函数关系是平凡的(trivial);而我们应该关注的是那些不平凡的函数依赖.</p>
+<h3 id="closure">Closure<a class="headerlink" href="#closure" title="Permanent link">&para;</a></h3>
+<p>这里的概念与离散数学中的高度重合,我们可以通过定律从函数依赖的集合推导出一个函数依赖的全集,称为为R的一个闭包.</p>
+<p>这些定律有(Armstrong's Axims):</p>
+<ul>
+<li>if <span class="arithmatex">\(\beta \subseteq \alpha\)</span> then <span class="arithmatex">\(\alpha \rightarrow beta\)</span> 自反律</li>
+<li>if <span class="arithmatex">\(\alpha \rightarrow \beta\)</span> then <span class="arithmatex">\(\gamma \alpha \rightarrow \beta\)</span> 增补律</li>
+<li>if <span class="arithmatex">\(\alpha \rightarrow \beta\)</span> and <span class="arithmatex">\(\beta \rightarrow \gamma\)</span> then <span class="arithmatex">\(\alpha \rightarrow gamma\)</span>传递律</li>
+</ul>
+<p>而一个属性(集合)的闭包,则是从它出发的可推导出的一个函数依赖的全集.</p>
+<h3 id="canonical-cover">Canonical Cover<a class="headerlink" href="#canonical-cover" title="Permanent link">&para;</a></h3>
+<p>和闭包的概念相反,对于一个函数依赖的集合F,我们希望找到一个最小的表示<span class="arithmatex">\(F_c\)</span>,使得F能够被<span class="arithmatex">\(F_c\)</span>所推出.这样的一个<span class="arithmatex">\(F_c\)</span>被称为正则覆盖;换言之,正则覆盖就是对集合F的一个化简,它们在逻辑上是相互等价的.</p>
+<h2 id="normal-form">Normal Form<a class="headerlink" href="#normal-form" title="Permanent link">&para;</a></h2>
+<p>有了理论基础,我们就可以设计一个好的关系模式,或者一个好的分解方法.</p>
+<h3 id="third-normal-form">Third Normal Form<a class="headerlink" href="#third-normal-form" title="Permanent link">&para;</a></h3>
+<p>第三范式是指,任何一个非平凡的函数依赖,如果左边不是一个Key,那么右边必须包含在一个 candidate key 里面.</p>
+<p>即对于一个relation schema <span class="arithmatex">\(R\)</span> 和函数依赖的集合 <span class="arithmatex">\(F^+\)</span>有: <span class="arithmatex">\(\forall \alpha \rightarrow \beta \in F^+\)</span> 满足以下之一的条件</p>
+<ul>
+<li><span class="arithmatex">\(\alpha \rightarrow \beta\)</span> is trivial</li>
+<li><span class="arithmatex">\(\alpha\)</span> is a superkey for <span class="arithmatex">\(R\)</span></li>
+<li>Each attribute A in <span class="arithmatex">\(\beta - \alpha\)</span> is contained in a candidate key for <span class="arithmatex">\(R\)</span></li>
+</ul>
+<div class="admonition exampl">
+<p class="admonition-title">Third Normal Form</p>
+<p>例如: R(J,K,L),和 F = {JK -&gt; L, L-&gt;K}</p>
+<p>我们可以推导得到有两个candidate key: JK 和 JL</p>
+<p>那么R是满足第三范式的,因为JK 是一个key,而K是candidate key 中的一个属性</p>
 </div>
-<p>关系涉及两个概念： <strong>关系模式</strong> 和 <strong>关系实例</strong>。关系模式(Schema)规定了关系的结构（例如 Student-schema = (sid, name, sex, age, dept) ）；关系实例(Instance)是一组实际的值。</p>
-<p>元组间的顺序是不重要的（它们可以任意排列），同一个关系中不存在完全相同的元组。（这些都是集合基本的性质）</p>
-<p>一个数据库一般会包含多个关系，我们希望能够从数据中提取关系，使得我们的查询、储存能够被最优化。</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>univ (instructor -ID, name, dept_name, salary,student_Id, ..) 
+<p>现在我们有了判断是否是一个好的关系模式的判断标准,现在我们需要考虑另一个问题:给定一个不好的关系模式,我们怎么将其变为一个满足第三范式的关系模式?</p>
+<div class="language-C highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">Let</span><span class="w"> </span><span class="n">Fc</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">canonical</span><span class="w"> </span><span class="n">cover</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">F</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nl">i</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">for</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">functional</span><span class="w"> </span><span class="n">dependency</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">Fc</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="p">{</span><span class="k">if</span><span class="w"> </span><span class="n">none</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">schemas</span><span class="w"> </span><span class="n">Rj</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">contains</span><span class="w"> </span><span class="n">ab</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">          </span><span class="n">then</span><span class="w"> </span><span class="n">begin</span><span class="w"> </span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">            </span><span class="nl">i</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">            </span><span class="nl">Ri</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ab</span><span class="p">)</span><span class="w"> </span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">          </span><span class="n">end</span><span class="p">}</span><span class="w"> </span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">if</span><span class="w"> </span><span class="n">none</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">schemas</span><span class="w"> </span><span class="n">Rj</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">j</span><span class="w">  </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="n">contains</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">candidate</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="n">then</span><span class="w"> </span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">begin</span><span class="w"> </span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="w">    </span><span class="nl">i</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w">  </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nl">Ri</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">candidate</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">R</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">end</span><span class="w"> </span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">R1</span><span class="p">,</span><span class="w"> </span><span class="n">R2</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="n">Ri</span><span class="p">)</span><span class="w"> </span>
 </span></code></pre></div>
-<p>例如如上的例子中，我们可以发现这样的关系存在诸多的问题：</p>
+<p>第一部分保证了将<span class="arithmatex">\(F_c\)</span>中的每个依赖分解为子模式<span class="arithmatex">\(R_i = (\alpha,\beta)\)</span>,这样一定保证了 Dependency Preserving 的性质.</p>
+<p>第二部分保证了至少在一个<span class="arithmatex">\(R_i\)</span>中存在一个candidate key 从而保证是一个 Lossless-Join Decomposition</p>
+<p>所以我们可以断言,一定存在一种分解是的一个Shema可以被分解为满足第三范式的的Schema,同时满足 Lossless-Join 和 Dependency Preverving 的性质</p>
+<p>可以看到,第三范式满足的要求允许我们存在部分的重复,但是我们可以在不用计算JOIN的情况下验证所有的函数依赖关系;这是因为我们保证了 Dependency Preserving 的性质.</p>
+<h3 id="boyce-codd-normal-form">Boyce-Codd Normal Form<a class="headerlink" href="#boyce-codd-normal-form" title="Permanent link">&para;</a></h3>
+<p>在第三范式的基础上,我们还可以追求更少的重复和更严格的性质吗?一个自然的想法是我们可以对第三范式的三个充分条件进行修改.如果我们放宽要求:对于第三个条件,我们可以不满足,就得到了 BCNF 新的范式</p>
+<p>BCNF 是指,任何一个非平凡的函数依赖,如果左边一定是关系的一个 Key.</p>
+<p>即对于一个relation schema <span class="arithmatex">\(R\)</span> 和函数依赖的集合 <span class="arithmatex">\(F^+\)</span>有: <span class="arithmatex">\(\forall \alpha \rightarrow \beta \in F^+\)</span> 满足以下之一的条件</p>
 <ul>
-<li>信息的重复：例如两个学生可能会有同一导师</li>
-<li>需要 null 值：有可能有没有导师的学生</li>
+<li><span class="arithmatex">\(\alpha \rightarrow \beta\)</span> is trivial</li>
+<li><span class="arithmatex">\(\alpha\)</span> is a superkey for <span class="arithmatex">\(R\)</span></li>
 </ul>
-<p>我们期望我们的关系之间是正交的，即通过最少的重复与代价来表示信息</p>
-<p><strong>Key</strong> 键</p>
-<ul>
-<li>一个键 K 是 super key ，当且仅当 K 能够确定 R 中每一个 Tuple</li>
-<li>
-<p>一个键 K 是 candidate key ，当且仅当 K 能够确定 R 中每一个 Tuple，且 K 是最小的</p>
-</li>
-<li>
-<p>一个键 K 是 primary key ， 当且仅当 K 是 candidate key 而且被用户显式的指定</p>
-</li>
-<li>一个键 K 是 foreign key ， 当且仅当 K 能够确定的参照两个关系</li>
-</ul>
+<div class="admonition exampl">
+<p class="admonition-title">Boyce-Codd Normal Form</p>
+<p>例如: R(J,K,L),和 F = {JK -&gt; L, L-&gt;K}</p>
+<p>我们可以推导得到有两个candidate key: JK 和 JL</p>
+<p>那么R是满足第三范式的,因为JK 是一个key,而K是candidate key 中的一个属性</p>
+<p>但是其不满足BCNF,因为L不是一个Super Key</p>
+</div>
+<p>同样的,以下是一个得到BCNF的分解算法
+<img alt="" src="../assets/03.png" /></p>
+<p>由于我们抛弃了第三条条件,BCNF的分解有可能不能满足Dependency Preserving 的性质.</p>
 
 
 
@@ -963,7 +1163,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一页: 数据库系统">
+          <a href="../ASQL/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Lec3 Advanced SQL">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -973,27 +1173,11 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                数据库系统
+                Lec3 Advanced SQL
               </div>
             </div>
           </a>
         
-        
-          
-          <a href="../SQL/" class="md-footer__link md-footer__link--next" aria-label="下一页: Lec2 SQL语言">
-            <div class="md-footer__title">
-              <span class="md-footer__direction">
-                下一页
-              </span>
-              <div class="md-ellipsis">
-                Lec2 SQL语言
-              </div>
-            </div>
-            <div class="md-footer__button md-icon">
-              
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-            </div>
-          </a>
         
       </nav>
     
