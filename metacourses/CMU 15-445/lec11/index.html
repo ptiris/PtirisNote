@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../lec4/">
+        <link rel="prev" href="../lec10/">
       
       
-        <link rel="next" href="../lec6/">
+        <link rel="next" href="../../../system/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Lec5 Hash Tables - Ptiris' Note</title>
+        <title>Lec11 Query Planning and Optimization - Ptiris' Note</title>
       
     
     
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hash-tables" class="md-skip">
+        <a href="#query-planning-optimization" class="md-skip">
           跳转至
         </a>
       
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Lec5 Hash Tables
+              Lec11 Query Planning and Optimization
             
           </span>
         </div>
@@ -529,30 +529,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Lec5 Hash Tables
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../lec5/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -561,101 +541,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#types-of-hash-tables" class="md-nav__link">
-    <span class="md-ellipsis">
-      Types of Hash Tables
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Types of Hash Tables">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#static-hash-table" class="md-nav__link">
-    <span class="md-ellipsis">
-      Static Hash Table
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hash-functions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Hash Functions
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hash-schemes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Hash Schemes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Hash Schemes">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#linear-probe-hashing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Linear Probe Hashing
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cuckoo-hashing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Cuckoo Hashing
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dynamic-hashing" class="md-nav__link">
-    <span class="md-ellipsis">
-      Dynamic Hashing
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -770,10 +655,30 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../lec11/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Lec11 Query Planning and Optimization
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -782,6 +687,110 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#query-architecture-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query Architecture Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Query Architecture Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#heuristicsrules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Heuristics/Rules
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-based-search" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost-Based Search
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Cost-Based Search">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#single-relation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Single Relation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multi-relation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi Relation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nested Query
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expression-rewriting" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expression Rewriting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-estimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Estimation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -883,56 +892,56 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#types-of-hash-tables" class="md-nav__link">
+  <a href="#query-architecture-overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Types of Hash Tables
+      Query Architecture Overview
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Types of Hash Tables">
+    <nav class="md-nav" aria-label="Query Architecture Overview">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#static-hash-table" class="md-nav__link">
+  <a href="#heuristicsrules" class="md-nav__link">
     <span class="md-ellipsis">
-      Static Hash Table
+      Heuristics/Rules
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#hash-functions" class="md-nav__link">
+  <a href="#cost-based-search" class="md-nav__link">
     <span class="md-ellipsis">
-      Hash Functions
+      Cost-Based Search
     </span>
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hash-schemes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Hash Schemes
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Hash Schemes">
+    <nav class="md-nav" aria-label="Cost-Based Search">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#linear-probe-hashing" class="md-nav__link">
+  <a href="#single-relation" class="md-nav__link">
     <span class="md-ellipsis">
-      Linear Probe Hashing
+      Single Relation
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#cuckoo-hashing" class="md-nav__link">
+  <a href="#multi-relation" class="md-nav__link">
     <span class="md-ellipsis">
-      Cuckoo Hashing
+      Multi Relation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nested-query" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nested Query
     </span>
   </a>
   
@@ -944,9 +953,18 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dynamic-hashing" class="md-nav__link">
+  <a href="#expression-rewriting" class="md-nav__link">
     <span class="md-ellipsis">
-      Dynamic Hashing
+      Expression Rewriting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-estimation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cost Estimation
     </span>
   </a>
   
@@ -972,128 +990,150 @@
                   
 
 
-<h1 id="hash-tables">Hash Tables<a class="headerlink" href="#hash-tables" title="Permanent link">&para;</a></h1>
-<p>我们需要高效、安全的数据结构来表示系统的状态与数据：</p>
-<ul>
-<li>Internal Meta-data</li>
-<li>Core Data Storage</li>
-<li>Temporary Data Structures</li>
-<li>Table Indexes</li>
-</ul>
-<p>所以通常而言我们使用两种了类型的数据结构来维护这个过程：</p>
-<ul>
-<li>Hash Tables (无序的)</li>
-<li>Trees (有序的)</li>
-</ul>
-<p>我们所言的高效和正确的数据结构，需要具有如下的特征：</p>
-<ul>
+<h1 id="query-planning-optimization">Query Planning &amp; Optimization<a class="headerlink" href="#query-planning-optimization" title="Permanent link">&para;</a></h1>
+<details class="abstract">
+<summary>Questions After Note</summary>
+<ol>
 <li>
-<p><strong>Data Organization</strong>: How we layout data structure in memory/pages and what information to store to support efficient access.</p>
+<p>在我们的成本估计的过程中，我们需要考虑对于一个算子，通过输入的规模来估计其成本。问题在于：我们是否需要考虑更多运行时的因素来作为成本估计的输入？例如，如果我们并行执行了两个JOIN算符，此时由于BufferPool中存在竞争，对于实际成本的影响应该是显著的。</p>
 </li>
 <li>
-<p><strong>Concurrency</strong>:  How to enable multiple threads to access the data structure at the same time without causing problems.</p>
+<p>在统计一个表格、属性的元数据时，我们是否可以通过一个近似的“分布”来拟合实际的分布，使得在成本估计中获得更精确的值？</p>
+</li>
+</ol>
+</details>
+<h2 id="query-architecture-overview">Query Architecture Overview<a class="headerlink" href="#query-architecture-overview" title="Permanent link">&para;</a></h2>
+<figure>
+<img alt="" src="../assets/61.png" />
+<figcaption>Query 的框架</figcaption>
+</figure>
+<p>我们从SQL语句到实际的Query Plan的整体框架如图所示：</p>
+<ol>
+<li>我们首先通过 Parser 生成一个抽象的语法树</li>
+<li>在生成语法树后，我们将树上的表格、索引等实例替换为一个实际的id(在Catalog Manager 中查询)，这一步称为绑定</li>
+<li>在绑定后，我们可以按照原始SQL的语义生成一个逻辑上的查询计划</li>
+<li>我们通过优化器对查询后的计划进行优化，最终生成一个实际会执行的计划</li>
+</ol>
+<p>关于AST与BINDER，前者属于编译原理等的内容，后者与具体的实现有关，在这里不再赘述；我们希望讨论的是第三点和第四点：我们如何生成一个逻辑上的查询计划，并且优化为一个实际执行的计划</p>
+<ul>
+<li>
+<p># <strong>Logcal Plans</strong> : 强调的是逻辑上等价的计划：对于一个SQL语句的输入，我们有多个逻辑上等价的计划，他们只要是在关系代数的层面上是等价的都可以</p>
+</li>
+<li>
+<p># <strong>Physical Plans</strong> ： 是指明确具体执行的方案和策略，需要具体到每个算子采取的算法等等..</p>
 </li>
 </ul>
-<div class="admonition quote">
-<p class="admonition-title">Definition</p>
-<p>A hash table implements an unordered associative array that maps keys to values.</p>
-<p>It uses a hash function to compute an offset into this array for a given key, from which the desired value can be found.</p>
+<div class="admonition example">
+<p class="admonition-title">Example</p>
+<p>例如在 JOIN 这一步，HASH_JOIN，INDEX_JOIN，NESTED-LOOP JOIN都可以是一个 Logical Plan，但是确对应着不同的 Physical Plan</p>
 </div>
-<p>需要注意的是，也许哈希表的时间复杂度平均为 O(1) 是一件好事，但是在数据库系统中，常数同样很重要！在巨大的表格中，例如涉及十亿个键的匹配，单次查询1ms的优化都会导致整体性能的巨大优化。</p>
-<h2 id="types-of-hash-tables">Types of Hash Tables<a class="headerlink" href="#types-of-hash-tables" title="Permanent link">&para;</a></h2>
-<h3 id="static-hash-table">Static Hash Table<a class="headerlink" href="#static-hash-table" title="Permanent link">&para;</a></h3>
-<p class="annotate">我们从最普通的哈希表，哈希函数模 N 的值将作为存储的位置的偏差量 (1)。需要注意的是，我们可能需要从储存原始的键值，来检测是否发生了冲突。</p>
-<ol>
-<li><img alt="" src="../assets/34.png" /></li>
-</ol>
-<p>但这样的哈希表只在理想的情况下工作：</p>
+<p>非常遗憾的是，生成若干逻辑等价的 Query Plan Tree是一个NP-Hard的问题。所以我们不得不做出取舍</p>
 <ul>
-<li>Assumption #1: Number of elements is known ahead of time and fixed.</li>
-<li>Assumption #2: Each key is unique.</li>
-<li>Assumption #3: Perfect hash function guarantees no collisions.</li>
+<li>我们在一邻域内进行搜索，最终确定一个在启发函数（估价）上最小的方案，这样称为 Cost-Based Search</li>
+<li>我们通过一些明确的规则或者技巧，进行优化（例如在Catalog 中存储更多的 metadata，将Select 下移），称为 Heuristics/Rules</li>
 </ul>
-<p>显然第三假设里的完美哈希函数并不存在。</p>
-<p>在这个例子中，我们可以看见我们理想的设计思路：</p>
-<ol>
-<li>哈函数需要将一个较大的键映射到一个较小的值域里面，这需要我们在性能与冲突率上权衡</li>
-<li>我们需要考虑如何处理键的冲突，以及在申请**一个较大的哈希表**和**维持较小的表所需要的额外的操作**之间权衡</li>
-</ol>
-<h3 id="hash-functions">Hash Functions<a class="headerlink" href="#hash-functions" title="Permanent link">&para;</a></h3>
-<p>在数据库系统中，我们并不关心哈希函数的任何保护隐私机制，所以我们不需要使用具有加密性质的哈希算法(e.g. SHA-256)。数据库系统更倾向于使用那些成熟的哈希算法。例如，常见的哈希算法如下：</p>
+<h3 id="heuristicsrules">Heuristics/Rules<a class="headerlink" href="#heuristicsrules" title="Permanent link">&para;</a></h3>
+<figure>
+<img alt="" src="../assets/62.png" />
+<figcaption>Predicate Pushdown</figcaption>
+</figure>
+<p>对于第一个方案，我们可以知道这样总是有效的。因为人们/机器总会写出一些蠢蠢的代码；在上图中，原始方案我们在 Join 这一步直接采用的是原始的表格；但是显然我们希望参与Join计算的数据量越小越好，所以我们可以下放 Predicate 去优先筛选一部分数据；在筛选后的数据上进行Join显然是更优的。</p>
+<figure>
+<img alt="" src="../assets/63.png" />
+<figcaption>Replace Cartesian Product</figcaption>
+</figure>
+<p>同样我们也可以知道，笛卡尔积和Predicate在一起时，我们将其转化为Join也是更优的。</p>
+<figure>
+<img alt="" src="../assets/64.png" />
+<figcaption>Projection Pushdown</figcaption>
+</figure>
+<p>和 Predicate Pushdown 类似，我们首先只选择了有关的属性而抛弃了无关的属性做运算的话，能够在一些很大的表格上显著减少计算量。</p>
+<p>像这样我们不断地去匹配一些已知的优化范式来减少计算量，就成为 Heuristics/Rules。我们不需要去具体的检查数据本身是什么样的，并且其优化效果是一定的。</p>
+<h3 id="cost-based-search">Cost-Based Search<a class="headerlink" href="#cost-based-search" title="Permanent link">&para;</a></h3>
+<p>这里的思路和启发式搜索十分类似；对于每一个从邻域搜索得到的树，我们通过一个启发函数来计算它的预计代价。我们最终选择有最小的启发函数值的方案。</p>
+<p>我们需要讨论的情景有三种：<strong>单个关系</strong> 的查询；<strong>多个关系</strong> 的查询；<strong>嵌套</strong> 的查询</p>
+<p>对于搜索，我们同样也有两种思路，<strong>从顶至底</strong> 的搜索与 <strong>从底至顶</strong> 的搜索</p>
+<h4 id="single-relation">Single Relation<a class="headerlink" href="#single-relation" title="Permanent link">&para;</a></h4>
+<p>一般而言，我们在单个的关系上的查询运用规则去优化就已经足够了，我们仅需要选择我们便利的方式即可。</p>
 <ul>
-<li><strong>CRC-64</strong> (1975)
-→ Used in networking for error detection.
-<strong>MurmurHash</strong> (2008)
-→ Designed as a fast, general-purpose hash function.</li>
-<li><strong>Google CityHash</strong> (2011)
-→ Designed to be faster for short keys (&lt;64 bytes).</li>
-<li><strong>Facebook XXHash</strong> (2012)
-→ From the creator of zstd compression.</li>
-<li><strong>Google FarmHash</strong> (2014)
-→ Newer version of CityHash with better collision rates.</li>
+<li>Sequential Scan</li>
+<li>Binary Search (clustered indexes)</li>
+<li>Index Scan</li>
 </ul>
-<h3 id="hash-schemes">Hash Schemes<a class="headerlink" href="#hash-schemes" title="Permanent link">&para;</a></h3>
-<p>在 Hash Schemes 中，我们需要讨论的是，在键经过哈希函数转换为了整数后，我们该如何具体的储存和处理冲突？</p>
-<h4 id="linear-probe-hashing">Linear Probe Hashing<a class="headerlink" href="#linear-probe-hashing" title="Permanent link">&para;</a></h4>
-<p>线性探测的思路非常简单： </p>
-<p>Single giant table of slots.</p>
-<p>Resolve collisions by linearly searching for the
-next free slot in the table.</p>
-<p>Linear Probing 固然简单，但当**删除**的时候将会非常的麻烦，例如：
-<img alt="" src="../assets/35.png" />
-<img alt="" src="../assets/36.png" /></p>
-<p>当我们插入C时，先前由于C与A位置冲突，C被排在了A的下一个；当我们删除C时，同样也是删除了A的后一个位置。但当我们查询D时，我们将会查找到一个空槽。</p>
-<p>为了处理这样的操作，我们要么通过 Reshashing , 即移动、整理所有的元素，但这效率相当地下；或者我们额外设计一个标记，来记录已经删除过数据的空的槽位。</p>
-<p>接下来需要解决的问题是不唯一的键值，我们需要处理当键值相同的时候值不唯一的情况。</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="linear-probe-hashing-separate-linked-list" name="__tabbed_1" type="radio" /><input id="linear-probe-hashing-redundant-keys" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="linear-probe-hashing-separate-linked-list"><strong>Separate Linked List</strong></label><label for="linear-probe-hashing-redundant-keys"><strong>Redundant Keys</strong></label></div>
+<p>这里我们需要根据我们 Predicate 本身来估计和选择</p>
+<h4 id="multi-relation">Multi Relation<a class="headerlink" href="#multi-relation" title="Permanent link">&para;</a></h4>
+<p>对于多个表格，尤其是涉及到多个表格的Join，它们Join的顺序是十分重要的；这里就对应了我们所说的搜索顺序：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="multi-relation-generative--bottom-up" name="__tabbed_1" type="radio" /><input id="multi-relation-transformation--bottom-up" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="multi-relation-generative--bottom-up">Generative / Bottom-Up</label><label for="multi-relation-transformation--bottom-up">Transformation / Bottom-Up</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p class="annotate">我们可以将哈希表储存的值变为一个列表 (1) ，列表内包含所有的可能的值。</p>
-<ol>
-<li><img alt="" src="../assets/37.png" /></li>
-</ol>
+<p>我们从原始的关系表格开始迭代的生成一个计划，每次向计划里增加新的执行方式与策略，这里更类似于动态规划的思想。例如：
+<figure markdown="span">
+<img alt="" src="../assets/65.png" />
+<figcaption>Projection Pushdown</figcaption>
+</figure></p>
+<p>这里为了达到 <span class="arithmatex">\(ARTIST \Join APPEARS \Join ALBUM\)</span>，我们选择了从三张原始的表格出发，来搭建一个计划；对于第一层，我们搜索所有可能的方案，并计算其代价，最终我们保留代价最小的方案。
+<figure markdown="span">
+<img alt="" src="../assets/66.png" />
+<figcaption>Projection Pushdown</figcaption>
+</figure></p>
+<p>然后我们在这些最小方案上继续搜索，找到下一步的所有可能方案，并计算代价和保留；最终我们在全局中寻找一个最优的方案。</p>
+<p><figure markdown="span">
+<img alt="" src="../assets/67.png" />
+<figcaption>Projection Pushdown</figcaption>
+</figure></p>
 </div>
 <div class="tabbed-block">
-<p class="annotate">我们也可以将其直接插入到表格中，按照正常的冲突方法来解决(1)，这也是绝大多数的数据库的方法。</p>
-<ol>
-<li><img alt="" src="../assets/38.png" /></li>
-</ol>
+<p>我们从最终的结果开始，从顶向底的生成我们的方案；对于这个例子而言，我们已知存在 ORDER BY 算符，我们则可以知道通过 MERGE_JOIN(A1<span class="arithmatex">\(\Join\)</span>A2,A3) 可以得到结果，所以我们进一步扩展这个 Physical Op。
+<figure markdown="span">
+<img alt="" src="../assets/68.png" />
+<figcaption>Projection Pushdown</figcaption>
+</figure></p>
+<p>紧接着对于操作数 ALBUM，它已经是原始的表格，我们不需要再在其基础上进行分解了；而对于 <span class="arithmatex">\(A1\Join{}A2\)</span>我们继续枚举..</p>
+<p><figure markdown="span">
+<img alt="" src="../assets/69.png" />
+<figcaption>Projection Pushdown</figcaption>
+</figure></p>
+<p>最终我们可能会得到多个方案，按照启发函数进行选择即可</p>
 </div>
 </div>
 </div>
-<h4 id="cuckoo-hashing">Cuckoo Hashing<a class="headerlink" href="#cuckoo-hashing" title="Permanent link">&para;</a></h4>
-<p class="annotate">为了解决上述的部分问题，我们可以引入多个哈希函数来找到多个位置来进行插入操作。即，当当前的哈希函数给出的位置被占用时，我们使用另一个哈希函数给出的位置，直到可以被放入为止(1)。</p>
-<ol>
-<li><img alt="" src="../assets/39.png" /></li>
-</ol>
-<p>一个显然的问题是，当我们用尽所有的哈希函数，都无法找到一个合适的位置时，该怎么处理冲突？</p>
-<p>我们可以通过先将就放不下的键，让它放入某个位置，因为它没有选择可言了；此时我们需要给原来在此处的位置的值重新找一个位置，即调用另一个哈希函数来看看有没有其他的选择；我们不断回溯直到所有的值都各就其位为止。</p>
-<p>这里的例子可以参见 <a href="https://15445.courses.cs.cmu.edu/fall2023/slides/07-hashtables.pdf">第七讲的slides</a></p>
-<p>但是这里我们又回到了我们设计存储时的一个基本的原则：应该最大化顺序的访问，但这里的 Hashing 的访问是随机的。</p>
-<p>一个有趣的问题是可以通过并行访问来实现对多个位置的同时访问吗？Andy给出的解释是对于SIMD或向量化的架构，这也许是成立的；但如果我们使用多个线程来实现这个过程，往往得不偿失。</p>
-<h3 id="dynamic-hashing">Dynamic Hashing<a class="headerlink" href="#dynamic-hashing" title="Permanent link">&para;</a></h3>
-<p>上述的两个方案，无论是 Linear Probing 亦或是 Cuckoo Hashing 都是静态的；我们需要去知晓/预估整个表格的大小，否则我们需要不断地 Rehashing/Rebuild 来适应表格的大小。我们期望一种动态的结构，能够以增量的方式来调整哈希表的大小，同时避免 Rehashing 的情况。</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="dynamic-hashing-chained-hashing" name="__tabbed_2" type="radio" /><input id="dynamic-hashing-extendible-hashing" name="__tabbed_2" type="radio" /><input id="dynamic-hashing-linear-hashing" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="dynamic-hashing-chained-hashing">Chained Hashing</label><label for="dynamic-hashing-extendible-hashing">Extendible Hashing</label><label for="dynamic-hashing-linear-hashing">Linear Hashing</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<p>在 Chain Hashing 中，我们在同一位置不再局限于存储同一个值。例如我们可以存储一个链表指针，将所有具有同一哈希函数的值都放进去。</p>
-<p>此时插入与删除将取决于我们存储多个值的结构，基本上变为了一个线性查找的过程。这样做的好处在于我们的存储结构可以采用变长的结构（e.g. vector）而不会影响到表格的其他部分。并且这里执行的是顺序的访问。</p>
-<p>我们可以在维护指针的同时，使用 <a href="https://en.wikipedia.org/wiki/Bloom_filter">Bloom Filter</a>来判断值是否存在；如果不存在则可以免去一次线性的查找。</p>
-</div>
-<div class="tabbed-block">
-<p>Extendible Hashing 的思路与 Chain Hashing 几乎完全一致，唯一的区别在于我们存储数据的 Bucket 的管理。Extendible Hashing 中多个位置的实际存储可能指向同一个 Bucket。当我们需要重建Hashing Table时，我们对这些Bucket进行分割、重排、增加大小来维护整个表格。</p>
-<p><img alt="" src="../assets/40.png" /></p>
-<p>我们需要维护一个全局的位数 N，对于每一个哈希函数给出的值，我们观察其前 N 位，将其对应到不同的 Bucket 上。当某个 Bucket 被填满时，我们需要扩充全局位数，然后新增更多的 Bucket 来对应新增的位数；同时合并一些 Bucket 来维护原有位数下的情况。</p>
-</div>
-<div class="tabbed-block">
-<p>Linear Hashing 是 Prosgress数据库使用的哈希方法。它维护了一个指针，用于指向下一个需要被分裂的Bucket。当任意的Bucket溢出时，我们将指针指向的Bucket</p>
-<p><img alt="" src="../assets/41.png" /></p>
-<p>例如，在上面的例子中，Split Pointer指向了0，此时我们插入 17 时，Bucket 1 发生了溢出，所以我们扩展 Bucket 1 的大小，然后将 Bucket 0分裂为两个；具体的分裂过程为按照第二个哈希函数进行分类。然后我们将 Splite Pointer 下移一位。</p>
-<p>这听着反直觉，但实际上最终会调整每一个 Bucket 的大小为合适的值。</p>
-</div>
-</div>
-</div>
-<p>Hash Table是速度与灵活性权衡后的一个结果，但我们将不会在实际的建立index的过程中使用它（尽管部分数据库给予了其支持），因为它并不支持前缀查找。而这将在下一节 B+ Tree 中得到解决。</p>
+<h4 id="nested-query">Nested Query<a class="headerlink" href="#nested-query" title="Permanent link">&para;</a></h4>
+<p>嵌套查询，对于人类而言更具有可读性，也可以进行更复杂的查询。对于一个复杂的嵌套子查询，我们通常有两种处理思路：</p>
+<ul>
+<li>Approach #1 Rewrite to de-correlate and/or flatten them.</li>
+<li>Approach #2 Decompose nested query and store results in a temporary table.</li>
+</ul>
+<h3 id="expression-rewriting">Expression Rewriting<a class="headerlink" href="#expression-rewriting" title="Permanent link">&para;</a></h3>
+<p>除了对于查询结构的优化，我们还可以对查询的表达式进行优化，例如对于 WHERE 和 ON 语句中的表达式进行优化。这一点在前一节已经提及；我们可以采取匹配某个Patter并优化的方法；我们可以进行实时编译...</p>
+<p>例如，有可能会出现不可能的查询，或者可以合并的语句：</p>
+<div class="language-SQL highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NULL</span><span class="p">;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">A</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">100</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">50</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">150</span><span class="p">;</span>
+</span></code></pre></div>
+<p>前两者是恒假的，我们可以直接跳过；后者可以优化为：</p>
+<div class="language-SQL highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">A</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="mi">150</span><span class="p">;</span>
+</span></code></pre></div>
+<h3 id="cost-estimation">Cost Estimation<a class="headerlink" href="#cost-estimation" title="Permanent link">&para;</a></h3>
+<p>接下来我们需要讨论如何进行代价的估计；这是一个相当困难的问题，并且我们估计的越准确，我们优化器所找出的方案一般更接近于最优解；并且我们还需要权衡这一步的性能与时间的开销。</p>
+<p>在主流数据库中，我们可以通过一些语句来对某些表格与数据进行统计学上的分析，这更加有助于我们的估计；因为这会产生许多对于我们估计有用的元数据。</p>
+<ul>
+<li>Postgres/SQLite: ANALYZE</li>
+<li>Oracle/MySQL: ANALYZE TABLE</li>
+<li>SQL Server: UPDATE STATISTICS</li>
+<li>DB2: RUNSTATS</li>
+</ul>
+<p>所以一个方法是，我们对于数据有柱状图的统计（离散意义上也可以），我们可以根据数据的分布来进行代价的估计。</p>
+<figure>
+<img alt="" src="../assets/70.png" />
+<figcaption>Age Distribution</figcaption>
+</figure>
+<p>例如，我们统计 Sel(age=9) 的代价，我们就可以通过元数据中的柱状图来进行分析；这样的数据不必要将更新每次都同步到元数据中；我们可以固定时间更新；可以设置更新同步的阈值；我们可以合并多个柱来得到一个大致范围的估计；这样就平衡了其开销与性能。</p>
+<p>我们也可以通过统计学上的概率分布来计算（这里回收了我在开始的问题）；我们可以通过一个近似分布来计算某些数据出现的概率；并按照更新进行修正。</p>
+<p>我们也可以通过直接采样（Sample）来直接获得其分布的大概，然后根据采样集的代价来估计真是代价。</p>
 
 
 
@@ -1129,7 +1169,7 @@ next free slot in the table.</p>
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href="../lec4/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Lec4 Storage Models">
+          <a href="../lec10/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Lec10 Query Execution">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1139,20 +1179,20 @@ next free slot in the table.</p>
                 上一页
               </span>
               <div class="md-ellipsis">
-                Lec4 Storage Models
+                Lec10 Query Execution
               </div>
             </div>
           </a>
         
         
           
-          <a href="../lec6/" class="md-footer__link md-footer__link--next" aria-label="下一页: Lec6 B plus Tree Index">
+          <a href="../../../system/" class="md-footer__link md-footer__link--next" aria-label="下一页: Systems">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                Lec6 B plus Tree Index
+                Systems
               </div>
             </div>
             <div class="md-footer__button md-icon">
