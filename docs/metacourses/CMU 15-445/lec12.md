@@ -295,7 +295,7 @@ Pessimistic Concurrency Control ：对于一个事务而言，我们总是悲观
 
 ### Lock Granularities
 
-当我们申请一个锁的时候，究竟是锁住了什么？一个表格？一个元组？还是一个元组中的一个属性？  ![alt text](image.png)
+当我们申请一个锁的时候，究竟是锁住了什么？一个表格？一个元组？还是一个元组中的一个属性？
 我们接下来将讨论锁的不同的粒度。
 
 <figure markdown="span">
@@ -343,3 +343,138 @@ SELECT * FROM T1 WHERE A = 1 FOR UPDATE;
 ```SQL
 SELECT * FROM T1 WHERE A = 1 SKIP LOCKED;
 ```
+
+## Optimistic Concurrency Control
+
+和悲观的并发控制不同，乐观的并发控制是基于这样的假设：我们在事务的执行过程中，假设不会遇见任何的冲突。即我们在事务的执行过程中，我们不需要对任何的资源进行锁定。我们只需要在事务结束的时候，检查一下是否存在冲突即可。
+
+但是我们同样会涉及到对于同一个资源的操作，所以一般而言，OCC 的实现会涉及 Workspace 。即对于每一个事务我们会创建一个工作空间：
+
+- 所有对象的读取都会将其备份至 Workspace 中
+- 所有的修改会应用至 Wrokspace 中
+
+当我们的操作完成时，我们对每一个 Workspace 进行检查，如果 Workspace 没有产生任何的冲突，我们就将其合并入主数据库中；否则我们就将其丢弃。
+
+总的而言，OCC 的实现可以分为三个阶段：
+
+- **Read Phase**: 在这个阶段中，我们追踪这个事务的所有读写的对象，并且将其备份至 Workspace 中。
+- **Validation Phase**: 在这个阶段中，我们赋予每一个事务一个时间戳，并且检查这个事务的所有读写的对象是否存在冲突。
+- **Write Phase**: 在这个阶段中，我们将 Workspace 中的所有修改合并入主数据库中，并更新这些对象的时间戳。
+
+<figure markdown="span">
+![](./assets/90.png)
+<figcaption>OCC Example 1</figcaption>
+</figure>
+
+例如，在上面的例子中，由于 T1 和 T2 都存在对于 A 的读写操作，所以我们分别从主数据库中读取了 A 的值，并且将其备份至 T1 与 T2 的 Workspace 中。
+
+在 T2 的 Validation Phase 中，我们赋予 T2 时间戳 1 (因为 T2 比 T1 更先 Commit)，并检查T2是否存在冲突。
+
+然后我们将 T2 的修改合并入主数据库中，并更新 A 的时间戳（但是这里并不存在更新，因为T2没有写）
+
+<figure markdown="span">
+![](./assets/91.png)
+<figcaption>OCC Example 2</figcaption>
+</figure>
+
+然后我们在 T1 中写入 A（此时T1对于A的读取都是在 Workspace 中进行的）。然后在 T1 的 Validation Phase 阶段，我们赋予 T1 时间戳 2，并检查 T1 是否存在冲突。此时我们将T1 的修改合并入主数据库中，并更新 A 的时间戳。
+
+### Validation Phase
+
+
+可以看到，OCC最关键的部分在于 Validation Phase 的设计。那么我们该如何进行 Validate 呢？
+
+我们假设在Validate的阶段，我们的验证是串行进行的。（并行的验证将会非常的复杂，我们在这里不做讨论）
+
+=== "Forward Validation"
+    向前验证正在提交的事务，是否和没有提交的事务存在冲突
+
+    如果我们发现 TS(T1) < TS(T2)，那么以下三个条件之一必须成立：
+
+    - TS(T1) < TS(T2)，那么 T1 的 Write Phase 必须先于 T2 的 Read Phase 发生
+    - TS(T1) < TS(T2)，那么 T1 的 Write Phase 必须先于 T2 的 Write Phase 发生，并且 T1 的写入的集合和 T2 的读取的集合没有交集
+    - TS(T1) < TS(T2)，那么 T1 的 Read Phase 必须先于 T2 的 Read Phase 完成，并且 T1 的写入的集合和 T2 的 **写入和读取** 的集合没有交集
+    <figure markdown="span">
+    ![](./assets/92.png)
+    <figcaption>Forward Invalidation</figcaption>
+    </figure>
+
+    例如，在这里，我们发现 T1 的时间戳大于 T2 的时间戳，按照第二条 T2 的 Write Phase 必须先于 T1 发生(即使T2没有实际上的Write)，所以T1必须被Abort。
+
+
+=== "Backward Validation"
+    向后验证正在提交的事务，是否和已经提交的事务存在冲突  
+    同样的我们在这里也需要按照类似的要求去判断是否违反了/须遵循某些规则
+
+
+---
+
+### Write Phase
+
+在写入阶段，我们需要将 Workspace 中的所有修改合并入主数据库中，并更新这些对象的时间戳。
+
+- 串行的 Commit : 我们通过一个Latch来保证每次有且仅有一个事务处于验证/写入阶段
+- 并行的 Commit ： 通过良好的代码设计来并行的执行验证/写入阶段
+
+### OCC Observations
+
+我们可以发现，OCC 在冲突较少的情况下（Low Conflics Workload）性能较好，因为我们不需要进行锁的申请和释放。
+
+- 大多数的事务都是只读的事务
+- 大多数的事务都只访问正交的数据
+
+但是OCC仍绕存在一些问题：
+
+- 频繁的拷贝，写回数据
+- 验证/写回存在一个瓶颈
+- Abort 对于性能的影响更大，因为一个事务在其基本完成之后才会触发 Abort。（相较于2PL而言）
+
+## Phantom Reads
+
+至今为止，我们讨论的写入的操作一般都是针对Update的，即我们所讨论的集合都是固定的。但是在实际的场景中，我们可能会遇见这样的情况：我们在一个事务中读取了一个集合，但是在另一个事务中插入了一个新的行，此时我们在第一个事务中读取这个集合的时候，可能会发现这个集合的大小发生了变化。
+
+<figure markdown="span">
+![](./assets/93.png)
+<figcaption>Phantom Reads</figcaption>
+</figure>
+
+如果我们在 T2 的事务中插入了一个新的行，那么在 T1 中，仍然会读取到 T2 中的行。
+
+这样的现象被称为 Phantom Reads。这诚然是我们不希望发生的。一般而言，我们可以采用下面的三种方法来避免这样的现象：
+
+- Re-Excute Scan : 我们重新运行一个查询，并统计其结果，检查是否存在大小的变化
+- Predicate Locking : 我们对每一个查询开始前的谓语进行判定，并锁定谓语对应的行
+- Index Locking : 我们对每一个索引的范围进行锁定
+
+## Isolation Levels
+
+在学习了不同的并发控制协议之后，我们最后在来看一看不同的隔离级别：
+<figure markdown="span">
+![](./assets/94.png)
+<figcaption>Isolation Levels</figcaption>
+</figure>
+
+最终，我们可以给出不同的隔离级别的一个具体的实现方案：
+
+- **SERIALIZABLE**: Strong Strict 2PL with phantom protection (e.g., index locks).
+- **REPEATABLE READS**: Same as above, but without phantom protection.
+- **READ COMMITTED**: Same as above, but S locks are released immediately.
+- **READ UNCOMMITTED**: Same as above but allows dirty reads (no S locks).
+
+我们在实际的实践中，可以使用SQL来设置不同的隔离级别：
+
+```SQL
+SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
+```
+
+但是并不是所有的DBMS都支持所有的隔离级别。我们所说的 SERIALIZABLE 只是一个Golden Goal，为了达到这个目标，我们可能会牺牲一些性能。所以我们需要在性能和隔离级别之间进行权衡。
+
+除此之外，DBMS可能并不会实际实现某一个隔离级别，即使他们声称实现了这个隔离级别。
+
+<figure markdown="span">
+![](./assets/95.png)
+<figcaption>Isolation Levels in Popular DBMS</figcaption>
+</figure>
+
+值得注意的是，Oracle和  YugaByte 出现了一个新的隔离级别：Snapshop Isolation。这是一个独立于我们目前的设计思路的一个隔离级别。我们将在下面的MVCC中进行介绍。
+
