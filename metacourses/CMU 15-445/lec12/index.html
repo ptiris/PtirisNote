@@ -836,6 +836,57 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Two Phase Locking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2pl" class="md-nav__link">
+    <span class="md-ellipsis">
+      2PL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strong-strict-2pl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strong Strict 2PL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dead-locks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dead Locks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lock-granularities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lock Granularities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lock-in-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lock in Practice
+    </span>
+  </a>
+  
 </li>
         
       </ul>
@@ -1057,6 +1108,57 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Two Phase Locking">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2pl" class="md-nav__link">
+    <span class="md-ellipsis">
+      2PL
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strong-strict-2pl" class="md-nav__link">
+    <span class="md-ellipsis">
+      Strong Strict 2PL
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dead-locks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dead Locks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lock-granularities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lock Granularities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lock-in-practice" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lock in Practice
+    </span>
+  </a>
+  
 </li>
         
       </ul>
@@ -1237,6 +1339,96 @@
 <p>每一个DBMS都有自己的实现方式与类别，这些锁都可以在其官方文档中查阅。</p>
 <h3 id="two-phase-locking">Two Phase Locking<a class="headerlink" href="#two-phase-locking" title="Permanent link">&para;</a></h3>
 <p>在介绍 2PL 之前，我们先来看一下一般情况下的 Lock 可能会遇见什么样的问题。</p>
+<figure>
+<img alt="" src="../assets/84.png" />
+<figcaption>Lock Confics</figcaption>
+</figure>
+<p>在上面的例子中，我们有两个事务 T1 和 T2。T1 先申请了 A 的排他锁，然后读取 A，修改A。然后T1 释放了 A 的锁。T2 先申请了 A 的锁，然后读取 A，修改A。然后T2 释放了 A 的锁。但此时当 T1 再次读取A 的时候，会发现 A 的结果与之前写入的结果不同，这里显然是存在冲突的。</p>
+<p>所以我们需要设计一个策略，决定每一个事务对锁的申请是否成功，什么时候释放锁等。</p>
+<h4 id="2pl">2PL<a class="headerlink" href="#2pl" title="Permanent link">&para;</a></h4>
+<p>在 2PL 中，我们将 Lock 的申请和释放分为两个阶段：
+- <strong>Growing Phase</strong>: 在这个阶段中，我们可以申请/升级任意的锁，但是不允许释放任何的锁。
+- <strong>Shrinking Phase</strong>: 在这个阶段中，我们可以释放/降级任意的锁，但是不允许申请任何的锁。</p>
+<figure>
+<img alt="" src="../assets/85.png" />
+<figcaption>2PL</figcaption>
+</figure>
+<p>那么在之前的例子中，我们就不会遇见相应的问题，因为 T1 不可能在事务的 Growing Phase 中释放对于A的锁。这样T2 就只能在 T1 释放了 A 的锁之后才能够申请到 A 的锁。这样就避免了 T1 和 T2 之间的冲突。</p>
+<figure>
+<img alt="" src="../assets/86.png" />
+<figcaption>Avoidance</figcaption>
+</figure>
+<p>2PL 的思想是较为简单的，但是却可能导致不同的问题：</p>
+<ul>
+<li><strong>Deadlock</strong>: 在 2PL 中，我们可能会遇见死锁的问题。即两个事务都在等待对方释放锁，导致两个事务都无法继续执行下去。</li>
+<li><strong>Dirty Reads</strong>: 在 2PL 中，我们还是没有避免 Dirty Reads 的问题。</li>
+<li><strong>Cascading Aborts</strong>：在 2PL 中，可能会出现大量的 Cascading Aborts ，严重影响性能。</li>
+</ul>
+<p>**Cascading Aborts**指的是：如果一个事务T2的读写基于另一个事务T1，那么当T1 Abort 的时候，T2 也必须 Abort。</p>
+<p>由于我们的基础的2PL没有保证在Commit之前不会释放锁，所以我们可能会遇见这样的情况：T1释放了A的锁，T2 读取了 A 的值，但是 T1 还没有 Commit，此时 T1 Abort 了，那么 T2 也必须 Abort。如果这样的依赖关系存在于多个事务之间，那么我们就会遇见大量的 Cascading Aborts 的问题。</p>
+<p>同时这也无法避免 <strong>Dirty Reads</strong> 因为同样的，我们在 Commit 前释放的锁都有可能导致 Read 读取了某个非法值。</p>
+<h4 id="strong-strict-2pl">Strong Strict 2PL<a class="headerlink" href="#strong-strict-2pl" title="Permanent link">&para;</a></h4>
+<p>所以我们需要一个更强的条件来避免这些问题的发生，即 Strong Strict 2PL。</p>
+<p>在 Strong Strict 2PL 中，我们额外要求：事务只有在Commit的时候才能释放锁。</p>
+<figure>
+<img alt="" src="../assets/87.png" />
+<figcaption>Strong Strict 2PL</figcaption>
+</figure>
+<h3 id="dead-locks">Dead Locks<a class="headerlink" href="#dead-locks" title="Permanent link">&para;</a></h3>
+<p>在 2PL 中，我们可能会遇见死锁的问题。即两个事务都在等待对方释放锁，导致两个事务都无法继续执行下去。（所有关于锁的协议都可能会遇见死锁的问题）。所以我们需要设计一个机制来避免死锁的发生。</p>
+<p>一般而言，我们有两种方式解决锁的问题：</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="dead-locks-deadlock-prevention" name="__tabbed_1" type="radio" /><input id="dead-locks-deadlock-detection" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="dead-locks-deadlock-prevention">Deadlock Prevention</label><label for="dead-locks-deadlock-detection">Deadlock Detection</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Deadlock Prevention 的方式是通过 Lock 的申请顺序来避免死锁的发生。我们可以通过对 Lock 的申请顺序进行排序来避免死锁的发生。即在申请锁的时候，我们总是按照某种顺序来申请锁，这样就可以避免死锁的发生。这是一种积极的避免死锁的策略。</p>
+<ul>
+<li>如果申请锁的事务比持有锁的事务有更高的优先级，那么我们等待持有锁的事务完成。</li>
+<li>否则申请锁的事务比持有锁的事务有更低的优先级，那么我们直接终止。</li>
+</ul>
+<p>关于优先级的定义，可以有不同的标准，在不同的工作负荷下，也会有不同的表现和权衡。
+例如，我们可以按照事务的 ID 来申请锁（Timestamp）:我们规定更老的事务优先级更高；也可以规定更年轻的事务优先级更高。</p>
+</div>
+<div class="tabbed-block">
+<p>和 Conflics Serilizable 一样，我们可以通过 Waits-for Graph 中是否存在环来判断是否存在 Deadlock 。即如果 T1 等待 T2 的锁释放，那么我们就添加一条有向边 T1 -&gt; T2。 如果这个图是有环的，那么我们就必须要进行 Deadlock 的处理。否则我们就可以继续执行。</p>
+<p>Deadlock Detection 的方式是较为简单的，但是在实际的实现中，我们需要考虑到 Deadlock Detection 的开销。我们需要权衡在频繁的检查死锁与事务等待死锁解决的时间之间的权衡。</p>
+<p>在检测到死锁后，我们需要选择一个事务进行 Abort。如何选择是一个较为复杂的问题。我们可以选择等待时间最长的事务进行 Abort，或者选择资源占用最少的事务进行 Abort，或者选择申请的锁最少的事务进行 Abort，选择回滚链最短的事务进行Abort。不同的选择会导致不同的性能表现。</p>
+</div>
+</div>
+</div>
+<h3 id="lock-granularities">Lock Granularities<a class="headerlink" href="#lock-granularities" title="Permanent link">&para;</a></h3>
+<p>当我们申请一个锁的时候，究竟是锁住了什么？一个表格？一个元组？还是一个元组中的一个属性？  <img alt="alt text" src="image.png" />
+我们接下来将讨论锁的不同的粒度。</p>
+<figure>
+<img alt="" src="../assets/88.png" />
+<figcaption>Lock Granularities </figcaption>
+</figure>
+<p>考虑到不同的层级结构的锁，我们需要引入新的锁的类型来提升性能：</p>
+<p>我们引入意象锁来表明：如果一个节点（数据库、表格、元组）被加上了意向锁，那么表明有一个事务正在对这个节点的子结点进行读写操作。意向锁的类型有三种：</p>
+<ul>
+<li>Intention Shared Lock (IS) : 表明有一个事务正在对这个节点的子结点进行 Shared Lock 的操作。</li>
+<li>Intention Exclusive Lock (IX) : 表明有一个事务正在对这个节点的子结点进行 Exclusive Lock 的操作。</li>
+<li>Shared + Intention Exclusive Lock (SIX) : 表明有一个事务正在对这个节点的子结点进行 Exclusive Lock 的操作，并且对这个节点本身进行 Share Lock 的操作。</li>
+</ul>
+<p>如此我们可以更新我们的表格：</p>
+<figure>
+<img alt="" src="../assets/89.png" />
+<figcaption>Matrices</figcaption>
+</figure>
+<p>此时再次申请锁时，我们需要保证：</p>
+<ul>
+<li>申请S锁时，必须保证在父节点上要有IS/S锁</li>
+<li>申请X锁时，必须保证在父节点上要有X/IX/SIX锁</li>
+</ul>
+<p>具体的例子可以查看<a href="https://15445.courses.cs.cmu.edu/fall2024/slides/17-twophaselocking.pdf">Lec17 的 Slides</a>，由于例子和动画较长这里放不下。</p>
+<h3 id="lock-in-practice">Lock in Practice<a class="headerlink" href="#lock-in-practice" title="Permanent link">&para;</a></h3>
+<p>在实际的实现中，我们有的时候需要给DBMS进行一些暗示，来间接地管理锁的申请和释放。这样可以提升一些并行性。例如在 PosgreSQL 中，我们可以使用 <code>FOR UPDATE</code> 来表示我们需要对某个元组进行锁定。</p>
+<div class="language-SQL highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FOR</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">;</span>
+</span></code></pre></div>
+<p>此时表示我们在 读取 T1 的时候，我们需要对 T1 中的 A = 1 的元组进行排他锁。</p>
+<p>同时我们也可以使用 <code>FOR SHARE</code> 来表示我们需要对某个元组进行共享锁。</p>
+<p>我们可以通过<code>SKIP LOCKED</code> 来表示我们需要跳过已经被锁定的元组。这样可以提高执行的性能。（例如，有的时候我们只想知道一个大概的统计）</p>
+<div class="language-SQL highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">SKIP</span><span class="w"> </span><span class="n">LOCKED</span><span class="p">;</span>
+</span></code></pre></div>
 
 
 
