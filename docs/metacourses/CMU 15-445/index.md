@@ -9,3 +9,10 @@ statistics: true
     笔者修习的版本是 [Fall 2023](https://15445.courses.cs.cmu.edu/fall2023/)。课程视频可以在 [bilibili](https://www.bilibili.com/video/BV1Ex4y1p7bi) 中找到中文字幕版。与课程相关的资源均可以在课程网站和 github 中找到。
 
     笔者也是数据库系统的初学者，所以如果有任何的问题，请指出并联系我
+
+关于课程的部分课程的笔记：
+
+- [ ] Lec21 Database Recovery 
+- [ ] Lec22 Introduction to Distributed Databases 
+- [ ] Lec23 Distributed OLTP Database Systems 
+
