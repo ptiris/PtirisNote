@@ -894,6 +894,66 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#optimistic-concurrency-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimistic Concurrency Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optimistic Concurrency Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Phase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write Phase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#occ-observations" class="md-nav__link">
+    <span class="md-ellipsis">
+      OCC Observations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phantom-reads" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phantom Reads
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isolation-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolation Levels
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1166,6 +1226,66 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#optimistic-concurrency-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      Optimistic Concurrency Control
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Optimistic Concurrency Control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation Phase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#write-phase" class="md-nav__link">
+    <span class="md-ellipsis">
+      Write Phase
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#occ-observations" class="md-nav__link">
+    <span class="md-ellipsis">
+      OCC Observations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#phantom-reads" class="md-nav__link">
+    <span class="md-ellipsis">
+      Phantom Reads
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#isolation-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      Isolation Levels
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1396,7 +1516,7 @@
 </div>
 </div>
 <h3 id="lock-granularities">Lock Granularities<a class="headerlink" href="#lock-granularities" title="Permanent link">&para;</a></h3>
-<p>当我们申请一个锁的时候，究竟是锁住了什么？一个表格？一个元组？还是一个元组中的一个属性？  <img alt="alt text" src="image.png" />
+<p>当我们申请一个锁的时候，究竟是锁住了什么？一个表格？一个元组？还是一个元组中的一个属性？
 我们接下来将讨论锁的不同的粒度。</p>
 <figure>
 <img alt="" src="../assets/88.png" />
@@ -1429,6 +1549,112 @@
 <p>我们可以通过<code>SKIP LOCKED</code> 来表示我们需要跳过已经被锁定的元组。这样可以提高执行的性能。（例如，有的时候我们只想知道一个大概的统计）</p>
 <div class="language-SQL highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">T1</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">SKIP</span><span class="w"> </span><span class="n">LOCKED</span><span class="p">;</span>
 </span></code></pre></div>
+<h2 id="optimistic-concurrency-control">Optimistic Concurrency Control<a class="headerlink" href="#optimistic-concurrency-control" title="Permanent link">&para;</a></h2>
+<p>和悲观的并发控制不同，乐观的并发控制是基于这样的假设：我们在事务的执行过程中，假设不会遇见任何的冲突。即我们在事务的执行过程中，我们不需要对任何的资源进行锁定。我们只需要在事务结束的时候，检查一下是否存在冲突即可。</p>
+<p>但是我们同样会涉及到对于同一个资源的操作，所以一般而言，OCC 的实现会涉及 Workspace 。即对于每一个事务我们会创建一个工作空间：</p>
+<ul>
+<li>所有对象的读取都会将其备份至 Workspace 中</li>
+<li>所有的修改会应用至 Wrokspace 中</li>
+</ul>
+<p>当我们的操作完成时，我们对每一个 Workspace 进行检查，如果 Workspace 没有产生任何的冲突，我们就将其合并入主数据库中；否则我们就将其丢弃。</p>
+<p>总的而言，OCC 的实现可以分为三个阶段：</p>
+<ul>
+<li><strong>Read Phase</strong>: 在这个阶段中，我们追踪这个事务的所有读写的对象，并且将其备份至 Workspace 中。</li>
+<li><strong>Validation Phase</strong>: 在这个阶段中，我们赋予每一个事务一个时间戳，并且检查这个事务的所有读写的对象是否存在冲突。</li>
+<li><strong>Write Phase</strong>: 在这个阶段中，我们将 Workspace 中的所有修改合并入主数据库中，并更新这些对象的时间戳。</li>
+</ul>
+<figure>
+<img alt="" src="../assets/90.png" />
+<figcaption>OCC Example 1</figcaption>
+</figure>
+<p>例如，在上面的例子中，由于 T1 和 T2 都存在对于 A 的读写操作，所以我们分别从主数据库中读取了 A 的值，并且将其备份至 T1 与 T2 的 Workspace 中。</p>
+<p>在 T2 的 Validation Phase 中，我们赋予 T2 时间戳 1 (因为 T2 比 T1 更先 Commit)，并检查T2是否存在冲突。</p>
+<p>然后我们将 T2 的修改合并入主数据库中，并更新 A 的时间戳（但是这里并不存在更新，因为T2没有写）</p>
+<figure>
+<img alt="" src="../assets/91.png" />
+<figcaption>OCC Example 2</figcaption>
+</figure>
+<p>然后我们在 T1 中写入 A（此时T1对于A的读取都是在 Workspace 中进行的）。然后在 T1 的 Validation Phase 阶段，我们赋予 T1 时间戳 2，并检查 T1 是否存在冲突。此时我们将T1 的修改合并入主数据库中，并更新 A 的时间戳。</p>
+<h3 id="validation-phase">Validation Phase<a class="headerlink" href="#validation-phase" title="Permanent link">&para;</a></h3>
+<p>可以看到，OCC最关键的部分在于 Validation Phase 的设计。那么我们该如何进行 Validate 呢？</p>
+<p>我们假设在Validate的阶段，我们的验证是串行进行的。（并行的验证将会非常的复杂，我们在这里不做讨论）</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="validation-phase-forward-validation" name="__tabbed_2" type="radio" /><input id="validation-phase-backward-validation" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="validation-phase-forward-validation">Forward Validation</label><label for="validation-phase-backward-validation">Backward Validation</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>向前验证正在提交的事务，是否和没有提交的事务存在冲突</p>
+<p>如果我们发现 TS(T1) &lt; TS(T2)，那么以下三个条件之一必须成立：</p>
+<ul>
+<li>TS(T1) &lt; TS(T2)，那么 T1 的 Write Phase 必须先于 T2 的 Read Phase 发生</li>
+<li>TS(T1) &lt; TS(T2)，那么 T1 的 Write Phase 必须先于 T2 的 Write Phase 发生，并且 T1 的写入的集合和 T2 的读取的集合没有交集</li>
+<li>TS(T1) &lt; TS(T2)，那么 T1 的 Read Phase 必须先于 T2 的 Read Phase 完成，并且 T1 的写入的集合和 T2 的 <strong>写入和读取</strong> 的集合没有交集
+<figure markdown="span">
+<img alt="" src="../assets/92.png" />
+<figcaption>Forward Invalidation</figcaption>
+</figure></li>
+</ul>
+<p>例如，在这里，我们发现 T1 的时间戳大于 T2 的时间戳，按照第二条 T2 的 Write Phase 必须先于 T1 发生(即使T2没有实际上的Write)，所以T1必须被Abort。</p>
+</div>
+<div class="tabbed-block">
+<p>向后验证正在提交的事务，是否和已经提交的事务存在冲突<br />
+同样的我们在这里也需要按照类似的要求去判断是否违反了/须遵循某些规则</p>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="write-phase">Write Phase<a class="headerlink" href="#write-phase" title="Permanent link">&para;</a></h3>
+<p>在写入阶段，我们需要将 Workspace 中的所有修改合并入主数据库中，并更新这些对象的时间戳。</p>
+<ul>
+<li>串行的 Commit : 我们通过一个Latch来保证每次有且仅有一个事务处于验证/写入阶段</li>
+<li>并行的 Commit ： 通过良好的代码设计来并行的执行验证/写入阶段</li>
+</ul>
+<h3 id="occ-observations">OCC Observations<a class="headerlink" href="#occ-observations" title="Permanent link">&para;</a></h3>
+<p>我们可以发现，OCC 在冲突较少的情况下（Low Conflics Workload）性能较好，因为我们不需要进行锁的申请和释放。</p>
+<ul>
+<li>大多数的事务都是只读的事务</li>
+<li>大多数的事务都只访问正交的数据</li>
+</ul>
+<p>但是OCC仍绕存在一些问题：</p>
+<ul>
+<li>频繁的拷贝，写回数据</li>
+<li>验证/写回存在一个瓶颈</li>
+<li>Abort 对于性能的影响更大，因为一个事务在其基本完成之后才会触发 Abort。（相较于2PL而言）</li>
+</ul>
+<h2 id="phantom-reads">Phantom Reads<a class="headerlink" href="#phantom-reads" title="Permanent link">&para;</a></h2>
+<p>至今为止，我们讨论的写入的操作一般都是针对Update的，即我们所讨论的集合都是固定的。但是在实际的场景中，我们可能会遇见这样的情况：我们在一个事务中读取了一个集合，但是在另一个事务中插入了一个新的行，此时我们在第一个事务中读取这个集合的时候，可能会发现这个集合的大小发生了变化。</p>
+<figure>
+<img alt="" src="../assets/93.png" />
+<figcaption>Phantom Reads</figcaption>
+</figure>
+<p>如果我们在 T2 的事务中插入了一个新的行，那么在 T1 中，仍然会读取到 T2 中的行。</p>
+<p>这样的现象被称为 Phantom Reads。这诚然是我们不希望发生的。一般而言，我们可以采用下面的三种方法来避免这样的现象：</p>
+<ul>
+<li>Re-Excute Scan : 我们重新运行一个查询，并统计其结果，检查是否存在大小的变化</li>
+<li>Predicate Locking : 我们对每一个查询开始前的谓语进行判定，并锁定谓语对应的行</li>
+<li>Index Locking : 我们对每一个索引的范围进行锁定</li>
+</ul>
+<h2 id="isolation-levels">Isolation Levels<a class="headerlink" href="#isolation-levels" title="Permanent link">&para;</a></h2>
+<p>在学习了不同的并发控制协议之后，我们最后在来看一看不同的隔离级别：</p>
+<figure>
+<img alt="" src="../assets/94.png" />
+<figcaption>Isolation Levels</figcaption>
+</figure>
+<p>最终，我们可以给出不同的隔离级别的一个具体的实现方案：</p>
+<ul>
+<li><strong>SERIALIZABLE</strong>: Strong Strict 2PL with phantom protection (e.g., index locks).</li>
+<li><strong>REPEATABLE READS</strong>: Same as above, but without phantom protection.</li>
+<li><strong>READ COMMITTED</strong>: Same as above, but S locks are released immediately.</li>
+<li><strong>READ UNCOMMITTED</strong>: Same as above but allows dirty reads (no S locks).</li>
+</ul>
+<p>我们在实际的实践中，可以使用SQL来设置不同的隔离级别：</p>
+<div class="language-SQL highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">SET</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="w"> </span><span class="k">ISOLATION</span><span class="w"> </span><span class="k">LEVEL</span><span class="w"> </span><span class="k">SERIALIZABLE</span><span class="p">;</span>
+</span></code></pre></div>
+<p>但是并不是所有的DBMS都支持所有的隔离级别。我们所说的 SERIALIZABLE 只是一个Golden Goal，为了达到这个目标，我们可能会牺牲一些性能。所以我们需要在性能和隔离级别之间进行权衡。</p>
+<p>除此之外，DBMS可能并不会实际实现某一个隔离级别，即使他们声称实现了这个隔离级别。</p>
+<figure>
+<img alt="" src="../assets/95.png" />
+<figcaption>Isolation Levels in Popular DBMS</figcaption>
+</figure>
+<p>值得注意的是，Oracle和  YugaByte 出现了一个新的隔离级别：Snapshop Isolation。这是一个独立于我们目前的设计思路的一个隔离级别。我们将在下面的MVCC中进行介绍。</p>
 
 
 
