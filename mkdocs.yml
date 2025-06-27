@@ -111,6 +111,7 @@ nav:
     - Brain Computer Interface:
       - metacourses/BCI/index.md
       - Lec1 脑电信号预处理实践: metacourses/BCI/lec1.md
+      - Lec2 SSVEP 范式及其应用: metacourses/BCI/lec2.md
     - CMU 15-445: 
       - metacourses/CMU 15-445/index.md 
       - Lec1 Relational Model and Algebra: metacourses/CMU 15-445/lec1.md 
