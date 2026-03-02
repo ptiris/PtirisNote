@@ -140,6 +140,9 @@ nav:
       - Lec2 SQL语言: system/databases/SQL.md
       - Lec3 Advanced SQL: system/databases/ASQL.md
       - Lec4 关系数据库设计: system/databases/RelationDesign.md
+    - Compiler Principle:
+      - Lec1 Introduction: system/CP/lec1-introduction.md
+      - Lec2 Lexical Analysis: system/CP/lec2-Lexical-Analysis.md
   - Papers:
     - papers/index.md
     - System Papers:
