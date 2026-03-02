@@ -9,22 +9,22 @@
       
       
       
-        <link rel="prev" href="..">
+        <link rel="prev" href="../lec1-introduction/">
       
       
-        <link rel="next" href="BCI/">
+        <link rel="next" href="../../../papers/">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
     
     
       
-        <title>Meta - Ptiris' Note</title>
+        <title>Lec2 Lexical Analysis - Ptiris' Note</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
       
       
 
@@ -43,7 +43,7 @@
       
     
     
-      <link rel="stylesheet" href="../css/custom.css">
+      <link rel="stylesheet" href="../../../css/custom.css">
     
       <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
@@ -53,7 +53,7 @@
     
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#meta" class="md-skip">
+        <a href="#lexical-analysis" class="md-skip">
           跳转至
         </a>
       
@@ -88,7 +88,7 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="页眉">
-    <a href=".." title="Ptiris&#39; Note" class="md-header__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
+    <a href="../../.." title="Ptiris&#39; Note" class="md-header__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32v192c0 53 43 96 96 96h192c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48h-16v-96zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"/></svg>
@@ -108,7 +108,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Meta
+              Lec2 Lexical Analysis
             
           </span>
         </div>
@@ -178,7 +178,7 @@
   
   
     <li class="md-tabs__item">
-      <a href=".." class="md-tabs__link">
+      <a href="../../.." class="md-tabs__link">
         
   
     
@@ -193,13 +193,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../../metacourses/" class="md-tabs__link">
           
   
     
@@ -215,11 +213,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../system/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
     
@@ -239,7 +239,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../papers/" class="md-tabs__link">
+        <a href="../../../papers/" class="md-tabs__link">
           
   
     
@@ -280,7 +280,7 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Ptiris&#39; Note" class="md-nav__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
+    <a href="../../.." title="Ptiris&#39; Note" class="md-nav__button md-logo" aria-label="Ptiris' Note" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M88 0C74.7 0 64 10.7 64 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C119.5 47.7 112 40.1 112 24c0-13.3-10.7-24-24-24zM32 192c-17.7 0-32 14.3-32 32v192c0 53 43 96 96 96h192c53 0 96-43 96-96h16c61.9 0 112-50.1 112-112s-50.1-112-112-112H32zm352 64h16c26.5 0 48 21.5 48 48s-21.5 48-48 48h-16v-96zM224 24c0-13.3-10.7-24-24-24s-24 10.7-24 24c0 38.9 23.4 59.4 39.1 73.1l1.1 1c16.3 14.2 23.8 21.8 23.8 37.9 0 13.3 10.7 24 24 24s24-10.7 24-24c0-38.9-23.4-59.4-39.1-73.1l-1.1-1C231.5 47.7 224 40.1 224 24z"/></svg>
@@ -298,7 +298,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -307,6 +307,60 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
+      
+        
+  
+  
+    <a href="../../../metacourses/" class="md-nav__link">
+      
+  
+  <span class="md-ellipsis">
+    Meta
+  </span>
+  
+
+      
+        <span class="md-nav__icon md-icon"></span>
+      
+    </a>
+  
+
+      
     </li>
   
 
@@ -324,6 +378,8 @@
       
         
           
+        
+      
         
       
         
@@ -347,605 +403,531 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           
           <div class="md-nav__link md-nav__container">
-            <a href="./" class="md-nav__link md-nav__link--active">
+            <a href="../../" class="md-nav__link ">
               
-  
-  <span class="md-ellipsis">
-    Meta
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link md-nav__link--active" for="__nav_2" id="__nav_2_label" tabindex="">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2">
-            <span class="md-nav__icon md-icon"></span>
-            Meta
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="BCI/" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    Brain Computer Interface
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_2">
-            <span class="md-nav__icon md-icon"></span>
-            Brain Computer Interface
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="BCI/lec1/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec1 脑电信号预处理实践
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="BCI/lec2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec2 SSVEP 范式及其应用
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="BCI/lec3/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec3 VR-EEG 情绪感知系统实践
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="BCI/lec4/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec4 注意力与音乐
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-      
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="CMU%2015-445/" class="md-nav__link ">
-              
-  
-  <span class="md-ellipsis">
-    CMU 15-445
-  </span>
-  
-
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2_3" id="__nav_2_3_label" tabindex="">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_3">
-            <span class="md-nav__icon md-icon"></span>
-            CMU 15-445
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec1/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec1 Relational Model and Algebra
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec2/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec2 Mordern SQL
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec3/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec3 Database Storage
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec4/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec4 Storage Models
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec5/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec5 Hash Tables
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec6/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec6 B plus Tree Index
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec7/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec7 Concurrency Control
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec8/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec8 Sorting and Aggregation Algorithms
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec9/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec9 Join Algorithms
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec10/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec10 Query Execution
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec11/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec11 Query Planning and Optimization
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="CMU%2015-445/lec12/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Lec12 Transaction And Concurrency Control
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-      
-        
-          
-        
-      
-        
-      
-        
-      
-        
-      
-    
-    
-      
-      
-        
-      
-    
-    
-      
-        
-        
-      
-    
-    <li class="md-nav__item md-nav__item--pruned md-nav__item--nested">
-      
-        
-  
-  
-    <a href="../system/" class="md-nav__link">
-      
   
   <span class="md-ellipsis">
     System
   </span>
   
 
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
       
-        <span class="md-nav__icon md-icon"></span>
+        
       
-    </a>
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Computer Architecture
+  </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computer Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CA/intro2CA/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CA/lec1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec1 Fundamentals of design
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CA/lec2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec2 Pipling
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_3" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../databases/" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Database
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../databases/%E5%85%B3%E7%B3%BB%E6%A8%A1%E5%9E%8B/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec1 关系模型
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../databases/SQL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec2 SQL语言
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../databases/ASQL/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec3 Advanced SQL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../databases/RelationDesign/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec4 关系数据库设计
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Compiler Principle
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Compiler Principle
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lec1-introduction/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lec1 Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Lec2 Lexical Analysis
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Lec2 Lexical Analysis
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lexical-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lexical Token
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-of-lexical-analyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation of Lexical Analyzer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regular-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regular Expressions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      DFA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-driven-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table Driven Implementation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -984,7 +966,7 @@
         
   
   
-    <a href="../papers/" class="md-nav__link">
+    <a href="../../../papers/" class="md-nav__link">
       
   
   <span class="md-ellipsis">
@@ -1023,6 +1005,74 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Overview">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lexical-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lexical Token
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementation-of-lexical-analyzer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation of Lexical Analyzer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regular-expressions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Regular Expressions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      DFA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-driven-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table Driven Implementation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1036,16 +1086,151 @@
                   
 
 
-<h1 id="meta">Meta<a class="headerlink" href="#meta" title="Permanent link">&para;</a></h1>
-<p>这里将记录笔者在自学国内外优秀的课程的笔记。</p>
-<p>感谢<a href="https://csdiy.wiki/">CSDIY</a>的推荐，让我接触并了解到这些优秀的课程。</p>
-<div class="admonition abstract">
-<p class="admonition-title">Outline</p>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> CS 61A Fall 2022</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> CMU 15/445 数据库系统 Fall 2023 By Andy Pavlo &amp; Jignesh Patel</li>
+<h1 id="lexical-analysis">Lexical Analysis<a class="headerlink" href="#lexical-analysis" title="Permanent link">&para;</a></h1>
+<p>编译器的翻译顺序总体而言，可以看为将语言拆开来进行分析其各个结构和含义；然后将其组合到一起</p>
+<ul>
+<li>
+<p>Front end 部分执行分析</p>
+</li>
+<li>
+<p>Back end 进行组合生成</p>
+</li>
+<li>
+<p>现代的编译器还包含 Middle End ，在IR的层面进行优化</p>
+</li>
 </ul>
-</div>
+<p>前段部分可以进一步的分为</p>
+<ul>
+<li>
+<p>词法分析</p>
+</li>
+<li>
+<p>语法分析</p>
+</li>
+<li>
+<p>语义分析</p>
+</li>
+</ul>
+<hr />
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>词法分析的任务：输入一个字符流，输出一个Toekn流（删除了空白字符和注释）</p>
+<p>词法分析对于下层的接口通常是一个函数 <code>getToken</code> ，返还了下一个Token。</p>
+<p>但关键之处在于，如何用形式化的方式和工具进行词法分析：</p>
+<ul>
+<li>
+<p>能够更加高效和解耦合</p>
+</li>
+<li>
+<p>类似的方法在语法分析中也很有用</p>
+</li>
+</ul>
+<h3 id="lexical-token">Lexical Token<a class="headerlink" href="#lexical-token" title="Permanent link">&para;</a></h3>
+<p>一个 Lexical Token 是一个字符串，是构成程序语言语法的基本单元。Token的数量可能是无限的，但是Token的类别是有限的。例如:</p>
+<p><img alt="" src="../assets/token.png" /></p>
+<p>有的 Token 包含了语义值，例如 <code>ID(match0)</code>, <code>NUM(3)</code> 我们需要标注的语义值来区分其具体的信息。</p>
+<p>注意，有的部分是 Non-tokens，例如 <code>comment</code>,宏定义，空格和换行符等</p>
+<h3 id="implementation-of-lexical-analyzer">Implementation of Lexical Analyzer<a class="headerlink" href="#implementation-of-lexical-analyzer" title="Permanent link">&para;</a></h3>
+<p>我们如何取描述一个词法规则呢？我们可以用自然语言描述    </p>
+<ol>
+<li>
+<p>标识符是由字母和数字组成的序列；第一个字符必须是字母。下划线 _ 也算作一个字母。</p>
+</li>
+<li>
+<p>大写字母和小写字母是不同的。</p>
+</li>
+<li>
+<p>如果输入流已被解析为标记，直到某个给定的字符，则下一个标记将包含可能构成标记的最长字符串。</p>
+</li>
+<li>
+<p>空格、制表符、换行符和注释将被忽略，除非它们用于分隔标记。</p>
+</li>
+<li>
+<p>需要一些空格来分隔原本相邻的标识符、关键字和常量。</p>
+</li>
+</ol>
+<p>为了形式化的定义，我们需要人为地将其转换为正则表达式。</p>
+<h3 id="regular-expressions">Regular Expressions<a class="headerlink" href="#regular-expressions" title="Permanent link">&para;</a></h3>
+<p>除了计算理论中的定义，我们还有一些更加方便的简写：</p>
+<ul>
+<li>
+<p><code>[abcd]</code>等价于<code>(a|b|c|d)</code></p>
+</li>
+<li>
+<p><code>[b-g]</code>等价于<code>[bcdefg]</code></p>
+</li>
+<li>
+<p><code>M?</code>等价于<code>(M|ε)</code>而 <code>M+</code>等价于 <span class="arithmatex">\(M \cdot M^*\)</span></p>
+</li>
+<li>
+<p><code>.</code> 匹配任何的除了换行符的单个字符</p>
+</li>
+<li>
+<p><code>""</code>代表转义，我们匹配的就是引号内容本身</p>
+</li>
+</ul>
+<p>那么我们可以得到一系列Token的正则表达式</p>
+<p><center></p>
+<table>
+<thead>
+<tr>
+<th>Regular Expression</th>
+<th>Correspoding Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>if</td>
+<td>{return IF}</td>
+</tr>
+<tr>
+<td>[a-z][a-z0-9]*</td>
+<td>{return ID}</td>
+</tr>
+<tr>
+<td>[0-9]+</td>
+<td>{return NUM}</td>
+</tr>
+<tr>
+<td>([0-9]+"."[0-9]*) | ([0-9]*"."[0-9]+)</td>
+<td>{return REAL}</td>
+</tr>
+<tr>
+<td>("--"[a-z]*" \n") | (" "|"\n"|"\t")+</td>
+<td>{Do nothing}</td>
+</tr>
+<tr>
+<td>.</td>
+<td>error()</td>
+</tr>
+</tbody>
+</table>
+<p></center></p>
+<p>但是这里还是存在歧义：</p>
+<ul>
+<li>
+<p><code>if8</code> 是一个 id 还是两个 Token?</p>
+</li>
+<li>
+<p><code>if 89</code> 是一个 id 还是一个保留字？</p>
+</li>
+</ul>
+<p>所以我们引入两条规则：</p>
+<ul>
+<li>
+<p>最长匹配 Longest Match</p>
+</li>
+<li>
+<p>规则优先级 Rule Priority</p>
+</li>
+</ul>
+<p>在这两条规则上我们规定 Longest Match &gt; Rule Priority</p>
+<h3 id="dfa">DFA<a class="headerlink" href="#dfa" title="Permanent link">&para;</a></h3>
+<p>在给定以上的 Regular Expression ,我们就可以绘制对应的 DFA</p>
+<p><img alt="" src="../assets/dfa.png" /></p>
+<h3 id="table-driven-implementation">Table Driven Implementation<a class="headerlink" href="#table-driven-implementation" title="Permanent link">&para;</a></h3>
+<p>通过一个状态转移表格来记录DFA的图中的转移。此外，还需要一个 State 0 作为Dead State 来代表意料之外(或者不接受)的情况。</p>
+<p><img alt="" src="../assets/table.png" /></p>
+<p>为了实现 Longest Match 我们还需要额外的维护： Last-Final 和 Input Position at Last Final 当我们进入到一个 Deat State 的时候，我们回顾一下上一个 Last-Final 并将Input重置到 Input Pos Last Final</p>
 
 
 
@@ -1081,7 +1266,7 @@
       <nav class="md-footer__inner md-grid" aria-label="页脚" >
         
           
-          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="上一页: Welcome">
+          <a href="../lec1-introduction/" class="md-footer__link md-footer__link--prev" aria-label="上一页: Lec1 Introduction">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1091,20 +1276,20 @@
                 上一页
               </span>
               <div class="md-ellipsis">
-                Welcome
+                Lec1 Introduction
               </div>
             </div>
           </a>
         
         
           
-          <a href="BCI/" class="md-footer__link md-footer__link--next" aria-label="下一页: 脑机接口算法与实践">
+          <a href="../../../papers/" class="md-footer__link md-footer__link--next" aria-label="下一页: Papers">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                脑机接口算法与实践
+                Papers
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1144,12 +1329,12 @@
       <div class="md-progress" data-md-component="progress" role="progressbar"></div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.code.select", "content.tooltips", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "navigation.path", "search.share", "search.suggest", "toc.follow"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["announce.dismiss", "content.action.edit", "content.action.view", "content.code.annotate", "content.code.copy", "content.code.select", "content.tooltips", "navigation.expand", "navigation.footer", "navigation.indexes", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.path", "navigation.prune", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.tracking", "search.highlight", "navigation.path", "search.share", "search.suggest", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
       
-        <script src="../javascripts/katex.js"></script>
+        <script src="../../../javascripts/katex.js"></script>
       
         <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
       
