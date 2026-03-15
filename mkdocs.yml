@@ -149,3 +149,8 @@ nav:
       - FlexGen: papers/system/FlexGen.md
       - Aqua: papers/system/Aqua.md
       - MoE-LIGHTNING: papers/system/MOE-LIGHTNING.md
+
+  - Source Code :
+    - sourcecode/index.md
+    - System Source Code:
+      - FlexGen: sourcecode/system/FlexGen.md
